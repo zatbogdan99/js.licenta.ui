@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LaptopDto} from "../dto/laptop.dto";
 
 @Component({
   selector: 'app-root',
