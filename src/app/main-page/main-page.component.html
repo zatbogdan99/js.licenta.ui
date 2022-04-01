@@ -1,0 +1,64 @@
+<div style="padding: 10px">
+  <h5 style="font-size: 20pt">Licenta mea !!!</h5>
+</div>
+<div style="padding: 20px">
+  <h4 style="color: blueviolet; text-align: right">Magazin de calculatoare --> copie ieftina dupa PC GARAGE</h4>
+</div>
+
+<p-dataView [value]="products">
+  <ng-template let-product pTemplate="listItem">
+    <div>
+      {{product.description}}
+    </div>
+  </ng-template>
+</p-dataView>
+
+<!--<div class="card">-->
+<!--  <p-dataView [value]="products">-->
+<!--    <ng-template pTemplate="header">-->
+<!--      <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">-->
+<!--        <span class="p-input-icon-left p-mb-2 p-mb-md-0">-->
+<!--                  <i class="pi pi-search"></i>-->
+<!--              </span>-->
+<!--        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--    <ng-template let-product pTemplate="listItem">-->
+<!--      <div class="p-col-12">-->
+<!--        <div class="product-list-item">-->
+<!--          <div class="product-list-detail">-->
+<!--            <div class="product-name">{{product.name}}</div>-->
+<!--            <div class="product-description">{{product.description}}</div>-->
+<!--            <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--    <ng-template let-product pTemplate="gridItem">-->
+<!--      <div class="p-col-12 p-md-4">-->
+<!--        <div class="product-grid-item card">-->
+<!--          <div class="product-grid-item-top">-->
+<!--            <div>-->
+<!--              <i class="pi pi-tag product-category-icon"></i>-->
+<!--              <span class="product-category">{{product.category}}</span>-->
+<!--            </div>-->
+<!--            <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>-->
+<!--          </div>-->
+<!--          <div class="product-grid-item-content">-->
+<!--            <div class="product-name">{{product.name}}</div>-->
+<!--            <div class="product-description">{{product.description}}</div>-->
+<!--          </div>-->
+<!--          <div class="product-grid-item-bottom">-->
+<!--            <span class="product-price">${{product.price}}</span>-->
+<!--            <p-button icon="pi pi-shopping-cart"></p-button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--  </p-dataView>-->
+<!--</div>-->
+<div>
+  <button (click)="getAllProducts()">Buton</button>
+</div>
+
+
