@@ -8,8 +8,6 @@ import {ProductDto} from "../dto/product.dto";
   providedIn: 'root',
 })
 export class LicentaService {
-  licentaService: any;
-
   constructor(private http: HttpClient) {
 
   }

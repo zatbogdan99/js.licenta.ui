@@ -10,11 +10,26 @@ import { MainPageComponent } from './main-page/main-page.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {DataViewModule} from "primeng/dataview";
 import {ButtonModule} from "primeng/button";
+import {Panel, PanelModule} from 'primeng/panel';
+import {DropdownModule} from 'primeng/dropdown';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+import {RatingModule} from 'primeng/rating';
+import {RippleModule} from 'primeng/ripple';
+import {FormsModule} from '@angular/forms';
+import {MatSliderModule} from "@angular/material/slider";
+import {StyleClassModule} from "primeng/styleclass";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {GMapModule} from "primeng/gmap";
+import {SplitButtonModule} from "primeng/splitbutton";
+import { AddProductsPageComponent } from './add-products-page/add-products-page.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent
+    MainPageComponent,
+    AddProductsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +39,19 @@ import {ButtonModule} from "primeng/button";
     MatChipsModule,
     HttpClientModule,
     DataViewModule,
-    ButtonModule
+    ButtonModule,
+    PanelModule,
+    DropdownModule,
+    DialogModule,
+    InputTextModule,
+    RatingModule,
+    RippleModule,
+    FormsModule,
+    MatSliderModule,
+    StyleClassModule,
+    MatProgressSpinnerModule,
+    GMapModule,
+    SplitButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
