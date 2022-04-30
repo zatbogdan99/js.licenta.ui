@@ -5,7 +5,8 @@ import {AddProductsPageComponent} from "./add-products-page/add-products-page.co
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
-  {path: 'add-products', component: AddProductsPageComponent}
+  {path: 'add-products', component: AddProductsPageComponent},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

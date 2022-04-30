@@ -6,12 +6,15 @@ import {DataViewModule} from 'primeng/dataview';
 import {MenuItem, PrimeNGConfig, SelectItem, SortEvent} from "primeng/api";
 import {GMapModule} from 'primeng/gmap';
 import {Router} from "@angular/router";
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import {AddProductsPageComponent} from "../add-products-page/add-products-page.component";
 
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css']
+  styleUrls: ['./main-page.component.css'],
+  providers: [DialogService]
 })
 
 export class MainPageComponent implements OnInit {
@@ -25,7 +28,8 @@ export class MainPageComponent implements OnInit {
   options: any;
 
   constructor(private service: LicentaService, private http: HttpClient,
-              private primengConfig: PrimeNGConfig, private router: Router) {
+              private primengConfig: PrimeNGConfig, private router: Router,
+              public dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -35,18 +39,6 @@ export class MainPageComponent implements OnInit {
     this.sortOptions = [
       {label: 'Descrescator dupa pret', value: '!price'},
       {label: 'Crescator dupa pret', value: 'price'}
-    ];
-
-    this.items = [
-      {label: 'Laptop', icon: 'pi pi-check', command: () => {
-          this.addLaptop();
-        }},
-      {label: 'Placa video', icon: 'pi pi-check', command: () => {
-          this.addGraphicsCard();
-        }},
-      {label: 'Procesor', icon: 'pi pi-check', command: () => {
-        this.addProcessor();
-        }}
     ];
   }
 
@@ -79,19 +71,10 @@ export class MainPageComponent implements OnInit {
   }
 
   addProduct() {
-
-  }
-
-  private addLaptop() {
-    console.log('intru pe addLaptop');
+    const ref = this.dialogService.open(AddProductsPageComponent, {
+      header: 'Adăugare produs',
+      width: '70%'
+    });
     // this.router.navigateByUrl('/add-products');
-  }
-
-  private addGraphicsCard() {
-
-  }
-
-  private addProcessor() {
-
   }
 }

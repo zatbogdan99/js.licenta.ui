@@ -1,1 +1,180 @@
-<p>Aici adaug produse !!!</p>
+<p-dropdown [options]="products" (onChange)="onChange()" [(ngModel)]="product" optionLabel="product" optionValue="value"></p-dropdown>
+
+<div *ngIf="product === 2">
+  <h4 style="margin-bottom: 0">Chipset</h4>
+  <input type="text" pInputText [(ngModel)]="chipset">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1 || product === 2 || product ===3">
+  <h4 style="margin-bottom: 0">Nume</h4>
+  <input type="text" pInputText [(ngModel)]="name">
+  <span style="padding-bottom: 20px" class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Garanție</h4>
+  <input type="text" pInputText [(ngModel)]="waranty">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Display ID</h4>
+  <input type="text" pInputText [(ngModel)]="display">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Processor ID</h4>
+  <input type="text" pInputText [(ngModel)]="processor">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">RAM total</h4>
+  <input type="text" pInputText [(ngModel)]="ramTotal">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Tip de RAM</h4>
+  <input type="text" pInputText [(ngModel)]="ramType">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Frecventa RAM</h4>
+  <input type="text" pInputText [(ngModel)]="ramFrequency">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Sloturi RAM</h4>
+  <input type="text" pInputText [(ngModel)]="ramSlots">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Tip Stocare</h4>
+  <input type="text" pInputText [(ngModel)]="storageType">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Capacitate Stocare</h4>
+  <input type="text" pInputText [(ngModel)]="storageCapacity">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Interfata stocare</h4>
+  <input type="text" pInputText [(ngModel)]="storageInterface">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">FORM FACTOR stocare</h4>
+  <input type="text" pInputText [(ngModel)]="storageFormFactor">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Placa Video ID</h4>
+  <input type="text" pInputText [(ngModel)]="graphicsCard">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 1">
+  <h4 style="margin-bottom: 0">Pret</h4>
+  <input type="text" pInputText [(ngModel)]="price">
+  <span class="p-ml-2"></span>
+</div>
+
+
+<div *ngIf="product === 2">
+  <h4 style="margin-bottom: 0">Model</h4>
+  <input type="text" pInputText [(ngModel)]="model">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 2">
+  <h4 style="margin-bottom: 0">Capacitate</h4>
+  <input type="text" pInputText [(ngModel)]="capacity">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 2">
+  <h4 style="margin-bottom: 0">Tehnologie</h4>
+  <input type="text" pInputText [(ngModel)]="technology">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 2">
+  <h4 style="margin-bottom: 0">Tip</h4>
+  <input type="text" pInputText [(ngModel)]="type">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Familie</h4>
+  <input type="text" pInputText [(ngModel)]="family">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Model</h4>
+  <input type="text" pInputText [(ngModel)]="model">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Numar core-uri</h4>
+  <input type="text" pInputText [(ngModel)]="cores">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Numar thread-uri</h4>
+  <input type="text" pInputText [(ngModel)]="threads">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Frecventa de baza</h4>
+  <input type="text" pInputText [(ngModel)]="baseFrequency">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Frecventa maxima turbo</h4>
+  <input type="text" pInputText [(ngModel)]="maxTurboFrequency">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Cache L2</h4>
+  <input type="text" pInputText [(ngModel)]="l2_cache">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Cache L3</h4>
+  <input type="text" pInputText [(ngModel)]="l3_cache">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Tehnologie</h4>
+  <input type="text" pInputText [(ngModel)]="technology">
+  <span class="p-ml-2"></span>
+</div>
+
+<div *ngIf="product === 3">
+  <h4 style="margin-bottom: 0">Grafica integrata</h4>
+  <input type="text" pInputText [(ngModel)]="integrated_graphics">
+  <span class="p-ml-2"></span>
+</div>
+
+ <div style="margin-bottom: 1rem"></div>
+
+<p-button style="margin-top: 30px" class="p-button-secondary p-ml-2" label="Salvare" (onClick)="save()"></p-button>

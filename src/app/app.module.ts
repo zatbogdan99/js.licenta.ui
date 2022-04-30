@@ -24,6 +24,7 @@ import {GMapModule} from "primeng/gmap";
 import {SplitButtonModule} from "primeng/splitbutton";
 import { AddProductsPageComponent } from './add-products-page/add-products-page.component';
 import {RouterModule} from "@angular/router";
+import {DynamicDialogModule} from "primeng/dynamicdialog";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {RouterModule} from "@angular/router";
     StyleClassModule,
     MatProgressSpinnerModule,
     GMapModule,
-    SplitButtonModule
+    SplitButtonModule,
+    DynamicDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

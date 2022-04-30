@@ -4,13 +4,13 @@
     <h4 style="font-size: 14pt">PC workshop</h4>
   </div>
   <div class="card">
-    <p-dataView #dv [value]="products" [paginator]="true" [rows]="20" layout="grid">
+    <p-dataView #dv [value]="products" [lazy]="true" [paginator]="true" [rows]="30" layout="grid">
       <ng-template pTemplate="header">
         <div class="inline-flex">
           <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         </div>
         <p-button class="p-button-primary" label="Reîncarcă lista" icon="pi pi-refresh" iconPos="left" (click)="getAllProducts()"></p-button>
-        <p-splitButton class="p-button-primary" style="padding-right: 10px" label="Adăugare produs" [model]="items" (click)="addProduct()"></p-splitButton>
+        <p-button class="p-button-primary" style="padding-right: 10px" label="Adăugare produs" (click)="addProduct()"></p-button>
         <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
           <p-dropdown [options]="sortOptions" placeholder="Sortare" (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
           <div class="p-input-icon-left p-mb-2 p-mb-md-0">

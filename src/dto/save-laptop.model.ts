@@ -2,12 +2,12 @@ import {DisplayDto} from "./display.dto";
 import {ProcessorDto} from "./processor.dto";
 import {GraphicsCardDto} from "./graphics-card.dto";
 
-export interface LaptopDto {
+export class SaveLaptopModel {
   id: number;
   name: string;
-  guarantee: number;
-  display: DisplayDto;
-  processor: ProcessorDto;
+  waranty: number;
+  display: number;
+  processor: number;
   ramTotal: number;
   ramType: string;
   ramFrequency: number;
@@ -16,6 +16,9 @@ export interface LaptopDto {
   storageCapacity: number;
   storageInterface: string;
   storageFormFactor: number;
-  graphicsCard: GraphicsCardDto;
+  graphicsCard: number;
   price: number;
+
+  constructor() {
+  }
 }
