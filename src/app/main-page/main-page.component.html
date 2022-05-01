@@ -4,7 +4,7 @@
     <h4 style="font-size: 14pt">PC workshop</h4>
   </div>
   <div class="card">
-    <p-dataView #dv [value]="products" [lazy]="true" [paginator]="true" [rows]="30" layout="grid">
+    <p-dataView #dv [value]="products" [lazy]="true" [paginator]="true" [rows]="40" layout="grid">
       <ng-template pTemplate="header">
         <div class="inline-flex">
           <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
@@ -24,6 +24,7 @@
           <div class="product-grid-item card">
             <div class="product-grid-item-content">
               <div class="product-name">{{product.productType + " " + product.name}}</div>
+              <p-image [src]="product.photo" alt="Image" width="250"></p-image>
               <div class="product-description">{{product.description}}</div>
             </div>
             <div class="product-grid-item-bottom">

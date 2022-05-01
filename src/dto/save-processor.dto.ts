@@ -11,7 +11,7 @@ export class SaveProcessorDTO {
   threads: number;
   baseFrequency: number;
   maxTurboFrequency: number;
-  laCache: number;
+  l2Cache: number;
   l3Cache: number;
   technology: number;
   integratedGraphics: string;

@@ -25,6 +25,9 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import { AddProductsPageComponent } from './add-products-page/add-products-page.component';
 import {RouterModule} from "@angular/router";
 import {DynamicDialogModule} from "primeng/dynamicdialog";
+import {FileUploadModule} from "primeng/fileupload";
+import {MessageService} from "primeng/api";
+import {ImageModule} from "primeng/image";
 
 @NgModule({
   declarations: [
@@ -32,30 +35,32 @@ import {DynamicDialogModule} from "primeng/dynamicdialog";
     MainPageComponent,
     AddProductsPageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatRadioModule,
-    MatChipsModule,
-    HttpClientModule,
-    DataViewModule,
-    ButtonModule,
-    PanelModule,
-    DropdownModule,
-    DialogModule,
-    InputTextModule,
-    RatingModule,
-    RippleModule,
-    FormsModule,
-    MatSliderModule,
-    StyleClassModule,
-    MatProgressSpinnerModule,
-    GMapModule,
-    SplitButtonModule,
-    DynamicDialogModule
-  ],
-  providers: [],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatRadioModule,
+        MatChipsModule,
+        HttpClientModule,
+        DataViewModule,
+        ButtonModule,
+        PanelModule,
+        DropdownModule,
+        DialogModule,
+        InputTextModule,
+        RatingModule,
+        RippleModule,
+        FormsModule,
+        MatSliderModule,
+        StyleClassModule,
+        MatProgressSpinnerModule,
+        GMapModule,
+        SplitButtonModule,
+        DynamicDialogModule,
+        FileUploadModule,
+        ImageModule
+    ],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
