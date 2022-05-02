@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div *ngIf="!loading" style="background: aliceblue">
   <img src="assets/logo2.png" alt="Logo" style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
   <div style="padding: 30px;">
     <h4 style="font-size: 14pt">PC workshop</h4>
@@ -21,11 +21,11 @@
       </ng-template>
       <ng-template let-product pTemplate="gridItem">
         <div class="p-col-12 p-md-4">
-          <div class="product-grid-item card">
-            <div class="product-grid-item-content">
-              <div class="product-name">{{product.productType + " " + product.name}}</div>
-              <p-image class="image-wrapper" [ngStyle]="{'background-image':'data:image/jpeg;base64,{{product.photo}}'}" [src]="'data:image/jpeg;base64,' + product.photo"></p-image>
-              <div class="product-description">{{product.description}}</div>
+          <div class="product-grid-item card" style="width: 28rem">
+            <div class="product-grid-item-content" style="text-align: center">
+              <div class="product-name" style="text-align: center; padding-bottom: 12px">{{product.productType + " " + product.name}}</div>
+              <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="250" height="250" [preview]="true"></p-image>
+              <div class="product-description" style="text-align: left">{{product.description}}</div>
             </div>
             <div class="product-grid-item-bottom">
               <span class="product-price">${{product.price}}</span>

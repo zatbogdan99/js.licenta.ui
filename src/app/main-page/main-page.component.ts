@@ -34,6 +34,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //TODO de facut asta cu resolver
     this.getAllProducts();
     console.log('toate produsele: ', this.products);
 

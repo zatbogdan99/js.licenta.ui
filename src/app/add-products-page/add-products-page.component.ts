@@ -92,6 +92,8 @@ export class AddProductsPageComponent implements OnInit {
       console.log("Laptop saved");
       console.log(this.laptop);
     });
+
+    this.messageService.add({severity: 'info', summary: 'Laptop saved', detail: ''});
   }
 
   onChange() {
