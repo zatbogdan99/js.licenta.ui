@@ -8,6 +8,7 @@ import {GMapModule} from 'primeng/gmap';
 import {Router} from "@angular/router";
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {AddProductsPageComponent} from "../add-products-page/add-products-page.component";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class MainPageComponent implements OnInit {
 
   constructor(private service: LicentaService, private http: HttpClient,
               private primengConfig: PrimeNGConfig, private router: Router,
-              public dialogService: DialogService) {
+              public dialogService: DialogService, private sanitization: DomSanitizer) {
   }
 
   ngOnInit(): void {

@@ -24,7 +24,7 @@
           <div class="product-grid-item card">
             <div class="product-grid-item-content">
               <div class="product-name">{{product.productType + " " + product.name}}</div>
-              <p-image [src]="product.photo" alt="Image" width="250"></p-image>
+              <p-image class="image-wrapper" [ngStyle]="{'background-image':'data:image/jpeg;base64,{{product.photo}}'}" [src]="'data:image/jpeg;base64,' + product.photo"></p-image>
               <div class="product-description">{{product.description}}</div>
             </div>
             <div class="product-grid-item-bottom">
