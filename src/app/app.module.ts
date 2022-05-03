@@ -28,6 +28,7 @@ import {DynamicDialogModule} from "primeng/dynamicdialog";
 import {FileUploadModule} from "primeng/fileupload";
 import {MessageService} from "primeng/api";
 import {ImageModule} from "primeng/image";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {ImageModule} from "primeng/image";
         SplitButtonModule,
         DynamicDialogModule,
         FileUploadModule,
-        ImageModule
+        ImageModule,
+        ToastModule
     ],
   providers: [MessageService],
   bootstrap: [AppComponent]
