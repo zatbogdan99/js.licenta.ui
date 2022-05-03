@@ -1,5 +1,4 @@
-.form-inline {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
+.display-inline-block {
+  display: inline-block;
+  padding-right: 1rem;
 }
