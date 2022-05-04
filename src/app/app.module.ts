@@ -29,6 +29,11 @@ import {FileUploadModule} from "primeng/fileupload";
 import {MessageService} from "primeng/api";
 import {ImageModule} from "primeng/image";
 import {ToastModule} from "primeng/toast";
+import {SplitterModule} from "primeng/splitter";
+import {CommonModule} from "@angular/common";
+import {CheckboxModule} from "primeng/checkbox";
+import {RadioButtonModule} from "primeng/radiobutton";
+import {SliderModule} from "primeng/slider";
 
 @NgModule({
   declarations: [
@@ -36,32 +41,37 @@ import {ToastModule} from "primeng/toast";
     MainPageComponent,
     AddProductsPageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatRadioModule,
-        MatChipsModule,
-        HttpClientModule,
-        DataViewModule,
-        ButtonModule,
-        PanelModule,
-        DropdownModule,
-        DialogModule,
-        InputTextModule,
-        RatingModule,
-        RippleModule,
-        FormsModule,
-        MatSliderModule,
-        StyleClassModule,
-        MatProgressSpinnerModule,
-        GMapModule,
-        SplitButtonModule,
-        DynamicDialogModule,
-        FileUploadModule,
-        ImageModule,
-        ToastModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatRadioModule,
+    MatChipsModule,
+    HttpClientModule,
+    DataViewModule,
+    ButtonModule,
+    PanelModule,
+    DropdownModule,
+    DialogModule,
+    InputTextModule,
+    RatingModule,
+    RippleModule,
+    FormsModule,
+    MatSliderModule,
+    StyleClassModule,
+    MatProgressSpinnerModule,
+    GMapModule,
+    SplitButtonModule,
+    DynamicDialogModule,
+    FileUploadModule,
+    ImageModule,
+    ToastModule,
+    SplitterModule,
+    CommonModule,
+    CheckboxModule,
+    RadioButtonModule,
+    SliderModule
+  ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })

@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {AddProductsPageComponent} from "../add-products-page/add-products-page.component";
 import {DomSanitizer} from "@angular/platform-browser";
+import {BehaviorSubject, Observable} from "rxjs";
 
 
 @Component({
@@ -22,11 +23,20 @@ export class MainPageComponent implements OnInit {
 
   products: any;
   loading: boolean = false;
-  sortOptions: SelectItem[];
+  // sortOptions: SelectItem[];
   sortOrder: number;
   sortField: string;
   items: MenuItem[];
   options: any;
+  // filter: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  // filterObs: Observable<boolean> = this.filter.asObservable();
+  filter: boolean = false;
+  sortOption: string;
+  rangeValues: number[] = [0, 10000];
+  selectedProcessors: string[] = [];
+  selectedMemory: string[] = [];
+  selectedMemoryCapacity: string[] = [];
+  selectedRAM: string[] = [];
 
   constructor(private service: LicentaService, private http: HttpClient,
               private primengConfig: PrimeNGConfig, private router: Router,
@@ -38,10 +48,10 @@ export class MainPageComponent implements OnInit {
     this.getAllProducts();
     console.log('toate produsele: ', this.products);
 
-    this.sortOptions = [
-      {label: 'Descrescator dupa pret', value: '!price'},
-      {label: 'Crescator dupa pret', value: 'price'}
-    ];
+    // this.sortOptions = [
+    //   {label: 'Descrescator dupa pret', value: '!price'},
+    //   {label: 'Crescator dupa pret', value: 'price'}
+    // ];
   }
 
   getAllProducts() {
@@ -78,5 +88,12 @@ export class MainPageComponent implements OnInit {
       width: '70%'
     });
     // this.router.navigateByUrl('/add-products');
+  }
+
+  showFilters() {
+    // console.log(this.filter);
+    // this.filter.next(false);
+    // this.filterObs.subscribe();
+    this.filter = !this.filter;
   }
 }

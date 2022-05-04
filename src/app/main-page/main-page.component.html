@@ -1,53 +1,140 @@
 <div *ngIf="!loading" style="background: aliceblue">
-  <img src="assets/logo2.png" alt="Logo" style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
+  <img src="assets/logo2.png" alt="Logo"
+       style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
   <div style="padding: 30px;">
     <h4 style="font-size: 14pt">PC workshop</h4>
   </div>
-  <div class="card">
-    <p-dataView #dv [value]="products" [lazy]="true" [paginator]="true" [rows]="40" layout="grid">
-      <ng-template pTemplate="header">
-        <div class="inline-flex">
-          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </div>
-        <p-button class="p-button-primary" label="Reîncarcă lista" icon="pi pi-refresh" iconPos="left" (click)="getAllProducts()"></p-button>
-        <p-button class="p-button-primary" style="padding-right: 10px" label="Adăugare produs" (click)="addProduct()"></p-button>
-        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
-          <p-dropdown [options]="sortOptions" placeholder="Sortare" (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
-          <div class="p-input-icon-left p-mb-2 p-mb-md-0">
-                    <i class="pi pi-search"></i>
-                    <input type="search" pInputText placeholder="Search by Name">
+  <p-splitter>
+    <ng-template pTemplate>
+      <div style="width: 24rem">
+        <p-panel header="Sortare" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <!--              <p-dropdown style="padding-top: 1rem; padding-left: 2rem" [options]="sortOptions" placeholder="Sortare" (onChange)="onSortChange($event)"-->
+          <!--                          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>-->
+          <div class="p-field-radiobutton" style="padding-bottom: 1rem">
+            <p-radioButton value="Crescator" [(ngModel)]="sortOption" style="padding-right: 5px"></p-radioButton>
+            <label>Crescator</label>
           </div>
-        </div>
-      </ng-template>
-      <ng-template let-product pTemplate="gridItem">
-        <div class="p-col-12 p-md-4">
-          <div class="product-grid-item card" style="width: 28rem">
-            <div class="product-grid-item-content" style="text-align: center">
-              <div class="product-name" style="text-align: center; padding-bottom: 12px">{{product.productType + " " + product.name}}</div>
-              <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="250" height="250" [preview]="true"></p-image>
-              <div class="product-description" style="text-align: left">{{product.description}}</div>
-            </div>
-            <div class="product-grid-item-bottom">
-              <span class="product-price">${{product.price}}</span>
-              <p-button class="shopping-cart" icon="pi pi-shopping-cart"></p-button>
-            </div>
+          <div class="p-field-radiobutton">
+            <p-radioButton value="Descrescator" [(ngModel)]="sortOption" style="padding-right: 5px"></p-radioButton>
+            <label>Descrescator</label>
           </div>
-        </div>
-      </ng-template>
-      <ng-template let-product pTemplate="listItem">
-        <div class="p-col-12">
-          <div class="product-list-item">
-            <div class="product-list-detail">
-              <div class="product-name">{{product.name}}</div>
-              <div class="product-description">{{product.description}}</div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </p-dataView>
-  </div>
+        </p-panel>
 
-  <img src="assets/logo1.png" alt="Logo" style="width: 10%; height: auto; position: relative; bottom: 0; display: block; float: right">
+        <p-panel header="Pret: {{rangeValues[0] + ' - ' + rangeValues[1]}}" style="width: auto; padding-top: 10px; width: auto">
+          <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+        </p-panel>
+
+        <p-panel header="Producator Processor" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox style="padding-right: 5px" value="Intel" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <label>Intel</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="AMD" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <label>AMD</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="Apple" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <label>Apple</label>
+          </div>
+        </p-panel>
+
+        <p-panel header="Tip stocare" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox style="padding-right: 5px" value="SSD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <label>SSD</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="HDD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <label>HDD</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="SSHD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <label>SSHD</label>
+          </div>
+        </p-panel>
+
+        <p-panel header="Capacitate memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox style="padding-right: 5px" value="256" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <label>256 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="512" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <label>512 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="1024" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <label>1 TB</label>
+          </div>
+        </p-panel>
+
+        <p-panel header="Tip memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox style="padding-right: 5px" value="DDDR2" [(ngModel)]="selectedRAM"></p-checkbox>
+            <label>DDR2</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="DDR3" [(ngModel)]="selectedRAM"></p-checkbox>
+            <label>DDR3</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox style="padding-right: 5px" value="DDR4" [(ngModel)]="selectedRAM"></p-checkbox>
+            <label>DDR4</label>
+          </div>
+        </p-panel>
+      </div>
+    </ng-template>
+    <ng-template pTemplate>
+      <p-dataView #dv [value]="products" [lazy]="true" [paginator]="true" [rows]="40" layout="grid">
+        <ng-template pTemplate="header">
+          <div class="inline-flex">
+            <!--                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
+          </div>
+          <p-button class="p-button-primary" label="Reîncarcă lista" icon="pi pi-refresh" iconPos="left"
+                    (click)="getAllProducts()"></p-button>
+          <p-button class="p-button-primary" style="padding-right: 10px" label="Adăugare produs"
+                    (click)="addProduct()"></p-button>
+          <p-button class="p-button-primary" style="padding-right: 10px" label="Filtrare"
+                    (click)="showFilters()"></p-button>
+          <div class="p-input-icon-left p-mb-2 p-mb-md-0">
+            <i class="pi pi-search"></i>
+            <input type="search" pInputText placeholder="Căutare">
+          </div>
+        </ng-template>
+        <ng-template let-product pTemplate="gridItem">
+          <div class="p-col-12 p-md-4">
+            <div class="product-grid-item card" style="width: 28rem">
+              <div class="product-grid-item-content" style="text-align: center">
+                <div class="product-name"
+                     style="text-align: center; padding-bottom: 12px">{{product.productType + " " + product.name}}</div>
+                <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="250" height="250"
+                         [preview]="true"></p-image>
+                <div class="product-description" style="text-align: left">{{product.description}}</div>
+              </div>
+              <div class="product-grid-item-bottom">
+                <span class="product-price">${{product.price}}</span>
+                <p-button class="shopping-cart" icon="pi pi-shopping-cart"></p-button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-product pTemplate="listItem">
+          <div class="p-col-12">
+            <div class="product-list-item">
+              <div class="product-list-detail">
+                <div class="product-name">{{product.name}}</div>
+                <div class="product-description">{{product.description}}</div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </ng-template>
+  </p-splitter>
+
+  <img src="assets/logo1.png" alt="Logo"
+       style="width: 10%; height: auto; position: relative; bottom: 0; display: block; float: right">
 </div>
 
 <div *ngIf="loading" class="wrapper">
