@@ -37,17 +37,20 @@ export class MainPageComponent implements OnInit {
   selectedMemory: string[] = [];
   selectedMemoryCapacity: string[] = [];
   selectedRAM: string[] = [];
+  showDetailsView: boolean = false;
+  selectedProduct: ProductDto;
 
   constructor(private service: LicentaService, private http: HttpClient,
               private primengConfig: PrimeNGConfig, private router: Router,
               public dialogService: DialogService, private sanitization: DomSanitizer) {
-  }
-
-  ngOnInit(): void {
     //TODO de facut asta cu resolver
     this.getAllProducts();
     console.log('toate produsele: ', this.products);
+  }
 
+
+
+  ngOnInit(): void {
     // this.sortOptions = [
     //   {label: 'Descrescator dupa pret', value: '!price'},
     //   {label: 'Crescator dupa pret', value: 'price'}
@@ -95,5 +98,19 @@ export class MainPageComponent implements OnInit {
     // this.filter.next(false);
     // this.filterObs.subscribe();
     this.filter = !this.filter;
+  }
+
+  moveToDetailedView(product: ProductDto) {
+    this.selectedProduct = product;
+    this.showDetailsView = true;
+    console.log('Ii dau product = ', this.selectedProduct);
+    // this.router.navigateByUrl('/detailed-view');
+  }
+
+  backToList($event: boolean) {
+    console.log("Event", event);
+    if (event != undefined) {
+      this.showDetailsView = false;
+    }
   }
 }

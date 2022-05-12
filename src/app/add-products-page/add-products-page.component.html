@@ -171,7 +171,42 @@
 <!--    <span class="p-ml-2"></span>-->
   </div>
 
-  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 3">
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 4">
+    <h4 style="margin-bottom: 0">Luminozitate</h4>
+    <input type="text" pInputText [(ngModel)]="brightness">
+    <!--    <span class="p-ml-2"></span>-->
+  </div>
+
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 4">
+    <h4 style="margin-bottom: 0">Freesync</h4>
+    <input type="text" pInputText [(ngModel)]="freesync">
+    <!--    <span class="p-ml-2"></span>-->
+  </div>
+
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 4">
+    <h4 style="margin-bottom: 0">Gsync</h4>
+    <input type="text" pInputText [(ngModel)]="gsync">
+    <!--    <span class="p-ml-2"></span>-->
+  </div>
+
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 4">
+    <h4 style="margin-bottom: 0">Refresh Rate</h4>
+    <input type="text" pInputText [(ngModel)]="refreshRate">
+    <!--    <span class="p-ml-2"></span>-->
+  </div>
+
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 4">
+    <h4 style="margin-bottom: 0">Resolution</h4>
+    <input type="text" pInputText [(ngModel)]="resolution">
+    <!--    <span class="p-ml-2"></span>-->
+  </div>
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 4">
+    <h4 style="margin-bottom: 0">Screen Size</h4>
+    <input type="text" pInputText [(ngModel)]="screenSize">
+    <!--    <span class="p-ml-2"></span>-->
+  </div>
+
+  <div class="p-field p-col-12 p-md-4 display-inline-block" *ngIf="product === 3 || product == 4">
     <h4 style="margin-bottom: 0">Tehnologie</h4>
     <input type="text" pInputText [(ngModel)]="technology">
 <!--    <span class="p-ml-2"></span>-->
@@ -182,6 +217,7 @@
     <input type="text" pInputText [(ngModel)]="integrated_graphics">
 <!--    <span class="p-ml-2"></span>-->
   </div>
+
 </div>
 
 

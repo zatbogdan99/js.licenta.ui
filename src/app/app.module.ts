@@ -34,12 +34,15 @@ import {CommonModule} from "@angular/common";
 import {CheckboxModule} from "primeng/checkbox";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {SliderModule} from "primeng/slider";
+import { DetailedViewComponent } from './detailed-view/detailed-view.component';
+import {AccordionModule} from "primeng/accordion";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    AddProductsPageComponent
+    AddProductsPageComponent,
+    DetailedViewComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import {SliderModule} from "primeng/slider";
     CommonModule,
     CheckboxModule,
     RadioButtonModule,
-    SliderModule
+    SliderModule,
+    AccordionModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

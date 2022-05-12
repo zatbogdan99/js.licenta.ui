@@ -23,8 +23,7 @@ export class AddProductsPageComponent implements OnInit {
     {product: "Laptop", value: 1},
     {product: "PLaca video", value: 2},
     {product: "Procesor", value: 3},
-    {product: "Display", value: 4},
-    {product: "Inca ceva", value: 5}
+    {product: "Display", value: 4}
   ]
   loading: boolean = false;
   product: number = 1
@@ -61,6 +60,15 @@ export class AddProductsPageComponent implements OnInit {
   processor_technology: number;
   integrated_graphics: string;
   uploadedFiles: any[] = [];
+  brightness: number;
+  freesync: number;
+  gsync: number;
+  refreshRate: number;
+  resolution: string;
+  screenSize: number;
+
+
+
 
 
 
@@ -129,6 +137,8 @@ export class AddProductsPageComponent implements OnInit {
     this.service.saveGraphicsCard(this.graphicsCardDTO).subscribe(() => {
       console.log("Saved graphics card");
     })
+
+    this.messageService.add({severity: 'info', summary: 'Placa video salvata cu succes!', detail: ''});
   }
 
   private saveProcessor() {
@@ -149,6 +159,12 @@ export class AddProductsPageComponent implements OnInit {
     this.service.saveProcessor(this.processorDTO).subscribe(() => {
       console.log("Saved processor");
     });
+
+    this.messageService.add({severity: 'info', summary: 'Procesor salvat cu succes!', detail: ''});
+  }
+
+  private saveDisplay() {
+    this.messageService.add({severity: 'info', summary: 'Display salvat cu succes!', detail: ''});
   }
 
   onSelect(event: any) {

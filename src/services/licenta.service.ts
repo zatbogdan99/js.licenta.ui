@@ -19,6 +19,10 @@ export class LicentaService {
     return this.http.get<any>(this.getUrl(""));
   }
 
+  public getLaptop(id: number): Observable<LaptopDto> {
+    return this.http.post<LaptopDto>(this.getUrl("get-laptop"), id);
+  }
+
   public saveLaptop(laptop: SaveLaptopModel) {
     return this.http.post<SaveLaptopModel>(this.getUrl("save-laptop"), laptop);
   }

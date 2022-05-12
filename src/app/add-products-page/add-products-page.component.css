@@ -2,3 +2,24 @@
   display: inline-block;
   padding-right: 1rem;
 }
+
+.panelStyle {
+  width: auto;
+  padding-top: 10px;
+  width: auto;
+}
+
+.paddingRightStyle {
+  padding-right: 5px;
+}
+.paddingCheckbox {
+  padding-right: 5px;
+}
+
+.paddingTopStyle {
+  padding-top: 1rem;
+}
+
+.paddingLabelStyle {
+  padding-left: 10px;
+}
