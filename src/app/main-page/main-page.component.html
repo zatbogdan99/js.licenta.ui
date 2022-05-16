@@ -26,60 +26,60 @@
 
         <p-panel header="Producator Processor" class="panelStyle" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox value="Intel" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" value="Intel" [(ngModel)]="selectedProcessors"></p-checkbox>
             <label class="paddingLabelStyle">Intel</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox value="AMD" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" value="AMD" [(ngModel)]="selectedProcessors"></p-checkbox>
             <label class="paddingLabelStyle">AMD</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox value="Apple" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" value="Apple" [(ngModel)]="selectedProcessors"></p-checkbox>
             <label class="paddingLabelStyle">Apple</label>
           </div>
         </p-panel>
 
         <p-panel header="Tip stocare" class="panelStyle" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox class="paddingRightStyle" value="SSD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="SSD" [(ngModel)]="selectedMemory"></p-checkbox>
             <label>SSD</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="HDD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="HDD" [(ngModel)]="selectedMemory"></p-checkbox>
             <label>HDD</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="SSHD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="SSHD" [(ngModel)]="selectedMemory"></p-checkbox>
             <label>SSHD</label>
           </div>
         </p-panel>
 
         <p-panel header="Capacitate memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox class="paddingRightStyle" value="256" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="256" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
             <label>256 GB</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="512" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="512" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
             <label>512 GB</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="1024" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="1024" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
             <label>1 TB</label>
           </div>
         </p-panel>
 
         <p-panel header="Tip memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox class="paddingRightStyle" value="DDDR2" [(ngModel)]="selectedRAM"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="DDDR2" [(ngModel)]="selectedRAM"></p-checkbox>
             <label>DDR2</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="DDR3" [(ngModel)]="selectedRAM"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="DDR3" [(ngModel)]="selectedRAM"></p-checkbox>
             <label>DDR3</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="DDR4" [(ngModel)]="selectedRAM"></p-checkbox>
+            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="DDR4" [(ngModel)]="selectedRAM"></p-checkbox>
             <label>DDR4</label>
           </div>
         </p-panel>
@@ -114,6 +114,7 @@
               </div>
               <div class="product-grid-item-bottom">
                 <span class="product-price">${{product.price}}</span>
+                <p-chip class="stock-style" label="În stock" styleClass="p-mr-2 custom-chip"></p-chip>
                 <p-button class="shopping-cart" icon="pi pi-shopping-cart"></p-button>
               </div>
             </div>

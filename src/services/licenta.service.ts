@@ -6,6 +6,7 @@ import {ProductDto} from "../dto/product.dto";
 import {SaveLaptopModel} from "../dto/save-laptop.model";
 import {SaveGraphicsCardDto} from "../dto/save-graphics-card.dto";
 import {SaveProcessorDTO} from "../dto/save-processor.dto";
+import {SaveDisplayDto} from "../dto/save-display.dto";
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,13 @@ export class LicentaService {
 
   public saveProcessor(processor: SaveProcessorDTO) {
     return this.http.post<SaveProcessorDTO>(this.getUrl("save-processor"), processor);
+  }
+
+  public saveDisplay(display: SaveDisplayDto) {
+    return this.http.post<SaveProcessorDTO>(this.getUrl("save-display"), display);
+  }
+
+  public getDisplays(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-displays"));
   }
 }

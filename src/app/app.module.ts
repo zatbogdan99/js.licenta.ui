@@ -36,6 +36,7 @@ import {RadioButtonModule} from "primeng/radiobutton";
 import {SliderModule} from "primeng/slider";
 import { DetailedViewComponent } from './detailed-view/detailed-view.component';
 import {AccordionModule} from "primeng/accordion";
+import {ChipModule} from "primeng/chip";
 
 @NgModule({
   declarations: [
@@ -44,38 +45,39 @@ import {AccordionModule} from "primeng/accordion";
     AddProductsPageComponent,
     DetailedViewComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatRadioModule,
-    MatChipsModule,
-    HttpClientModule,
-    DataViewModule,
-    ButtonModule,
-    PanelModule,
-    DropdownModule,
-    DialogModule,
-    InputTextModule,
-    RatingModule,
-    RippleModule,
-    FormsModule,
-    MatSliderModule,
-    StyleClassModule,
-    MatProgressSpinnerModule,
-    GMapModule,
-    SplitButtonModule,
-    DynamicDialogModule,
-    FileUploadModule,
-    ImageModule,
-    ToastModule,
-    SplitterModule,
-    CommonModule,
-    CheckboxModule,
-    RadioButtonModule,
-    SliderModule,
-    AccordionModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatRadioModule,
+        MatChipsModule,
+        HttpClientModule,
+        DataViewModule,
+        ButtonModule,
+        PanelModule,
+        DropdownModule,
+        DialogModule,
+        InputTextModule,
+        RatingModule,
+        RippleModule,
+        FormsModule,
+        MatSliderModule,
+        StyleClassModule,
+        MatProgressSpinnerModule,
+        GMapModule,
+        SplitButtonModule,
+        DynamicDialogModule,
+        FileUploadModule,
+        ImageModule,
+        ToastModule,
+        SplitterModule,
+        CommonModule,
+        CheckboxModule,
+        RadioButtonModule,
+        SliderModule,
+        AccordionModule,
+        ChipModule
+    ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })

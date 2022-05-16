@@ -6,10 +6,16 @@ import {SaveGraphicsCardDto} from "../../dto/save-graphics-card.dto";
 import {SaveProcessorDTO} from "../../dto/save-processor.dto";
 import {core} from "@angular/compiler";
 import {MessageService} from "primeng/api";
+import {SaveDisplayDto} from "../../dto/save-display.dto";
 
-interface Product {
-  product: string,
-  value: number
+class Product {
+  product: string;
+  value: number;
+
+  constructor(product: string, value: number) {
+    this.product = product;
+    this.value = value;
+  }
 }
 
 @Component({
@@ -21,15 +27,45 @@ export class AddProductsPageComponent implements OnInit {
 
   products: Product[] = [
     {product: "Laptop", value: 1},
-    {product: "PLaca video", value: 2},
+    {product: "Placa video", value: 2},
     {product: "Procesor", value: 3},
     {product: "Display", value: 4}
   ]
+  processors: Product[] = [
+    {product: "Intel Core i5 7300HQ", value: 1},
+    {product: "Intel Core i5 10300H", value: 2},
+    {product: "AMD Ryzen 5 5600H", value: 3},
+    {product: "AMD Ryzen 7 4800H", value: 4},
+    {product: "Intel Core i7 1165G7", value: 5}
+  ]
+
+  rams: Product[] = [
+    {product: "Memorie RAM ADATA Premiere, 16GB DDR4, 3200Mhz, SODIMM", value: 1},
+    {product: "Memorie KINGSTON FURY, 8GB DDR4, 2666Mhz, CL15", value: 2},
+    {product: "Memorie Crucial, 16GB DDR4, 3200 Mhz, CL22", value: 3},
+    {product: "Memorie Patriot, 16GB DDR4, 3200 Mhz, CL22", value: 4},
+    {product: "Memorie KINGSTON, 16GB DDR4, 3200Mhz, CL22", value: 5}
+  ]
+
+  stocare: Product[] = [
+    {product: "SSD KINGSTON A400, 240 Gb, SATA III, 2.5 inch", value: 1},
+    {product: "SSD Samsung EVO 970, 1 Tb, M.2 PCI Express 3.0 x4, form factor 2280", value: 2},
+    {product: "SSD KINGSTON NV1, 250 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 3},
+    {product: "SSD ADATA Swordfish, 500 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 4}
+  ]
+
+  graphicsCards: Product[] = [
+    {product: "Nvidia GeForce GTX 1660 Ti 6GB", value: 1},
+    {product: "Nvidia GeForce RTX 2060 6GB ", value: 2},
+    {product: "Nvidia GeForce GTX 1050 4GB", value: 3}
+  ]
+  displays: Product[] = [];
   loading: boolean = false;
   product: number = 1
   laptop: SaveLaptopModel;
   graphicsCardDTO: SaveGraphicsCardDto;
   processorDTO: SaveProcessorDTO;
+  displayDTO: SaveDisplayDto;
   name: string;
   waranty: number;
   display: number;
@@ -76,6 +112,15 @@ export class AddProductsPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('intram in onInit', this.products);
+    this.enableLoading();
+    this.service.getDisplays().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.displays.push(new Product(p.description, i++));
+      })
+      this.disableLoading();
+    });
+    console.log("Displays: ", this.displays);
   }
 
   saveLaptop() {
@@ -104,7 +149,7 @@ export class AddProductsPageComponent implements OnInit {
     this.messageService.add({severity: 'info', summary: 'Laptop saved', detail: ''});
   }
 
-  onChange() {
+    onChange() {
     console.log(this.product);
   }
 
@@ -120,6 +165,10 @@ export class AddProductsPageComponent implements OnInit {
       }
       case 3: {
         this.saveProcessor();
+        break;
+      }
+      case 4: {
+        this.saveDisplay();
         break;
       }
     }
@@ -164,6 +213,18 @@ export class AddProductsPageComponent implements OnInit {
   }
 
   private saveDisplay() {
+    this.displayDTO = new SaveDisplayDto();
+    this.displayDTO.gsync = this.gsync;
+    this.displayDTO.freesync = this.freesync;
+    this.displayDTO.brightness = this.brightness;
+    this.displayDTO.refreshRate = this.refreshRate;
+    this.displayDTO.resolution = this.resolution;
+    this.displayDTO.screenSize = this.screenSize;
+
+    this.service.saveDisplay(this.displayDTO).subscribe(() => {
+      console.log("Saved display");
+    })
+
     this.messageService.add({severity: 'info', summary: 'Display salvat cu succes!', detail: ''});
   }
 
@@ -171,12 +232,12 @@ export class AddProductsPageComponent implements OnInit {
     console.log("intru pe onUpload");
     this.uploadedFiles = [];
     for(let file of event.files) {
-      this.enableLoading();
+      // this.enableLoading();
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.uploadedFiles.push(reader.result);
-        this.disableLoading();
+        // this.disableLoading();
         this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
         console.log('In on reload', this.uploadedFiles);
       };

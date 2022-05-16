@@ -150,3 +150,12 @@
 .shopping-cart {
   float: right;
 }
+
+.stock-style {
+  padding-left: 1rem;
+}
+
+:host ::ng-deep .p-chip.custom-chip {
+  background: #067a06;
+  color: #ffffff;
+}
