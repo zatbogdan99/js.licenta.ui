@@ -47,4 +47,8 @@ export class LicentaService {
   public getDisplays(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-displays"));
   }
+
+  public getProcessors(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-processors"));
+  }
 }

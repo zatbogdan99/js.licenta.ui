@@ -31,13 +31,7 @@ export class AddProductsPageComponent implements OnInit {
     {product: "Procesor", value: 3},
     {product: "Display", value: 4}
   ]
-  processors: Product[] = [
-    {product: "Intel Core i5 7300HQ", value: 1},
-    {product: "Intel Core i5 10300H", value: 2},
-    {product: "AMD Ryzen 5 5600H", value: 3},
-    {product: "AMD Ryzen 7 4800H", value: 4},
-    {product: "Intel Core i7 1165G7", value: 5}
-  ]
+  processors: Product[] = [];
 
   rams: Product[] = [
     {product: "Memorie RAM ADATA Premiere, 16GB DDR4, 3200Mhz, SODIMM", value: 1},
@@ -121,6 +115,17 @@ export class AddProductsPageComponent implements OnInit {
       this.disableLoading();
     });
     console.log("Displays: ", this.displays);
+
+    this.enableLoading();
+    this.service.getProcessors().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.processors.push(new Product(p.description, i++));
+      })
+      this.disableLoading();
+    });
+
+
   }
 
   saveLaptop() {
