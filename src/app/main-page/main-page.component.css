@@ -156,6 +156,18 @@
 }
 
 :host ::ng-deep .p-chip.custom-chip {
-  background: #067a06;
+  background: #53c953;
   color: #ffffff;
+}
+
+.radio-button-padding {
+  padding-right: 5px;
+}
+
+.checkbox-padding {
+  padding-right: 8px;
+}
+
+.big-padding {
+  padding-right: 10px;
 }

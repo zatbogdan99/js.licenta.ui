@@ -9,7 +9,8 @@ import {Router} from "@angular/router";
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {AddProductsPageComponent} from "../add-products-page/add-products-page.component";
 import {DomSanitizer} from "@angular/platform-browser";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {FilterDto} from "../../dto/filter.dto";
 
 
 @Component({
@@ -32,13 +33,14 @@ export class MainPageComponent implements OnInit {
   // filterObs: Observable<boolean> = this.filter.asObservable();
   filter: boolean = false;
   sortOption: string;
-  rangeValues: number[] = [0, 10000];
+  rangeValues: number[] = [0, 5000];
   selectedProcessors: string[] = [];
   selectedMemory: string[] = [];
   selectedMemoryCapacity: string[] = [];
   selectedRAM: string[] = [];
   showDetailsView: boolean = false;
   selectedProduct: ProductDto;
+  filterDTO: FilterDto;
 
   constructor(private service: LicentaService, private http: HttpClient,
               private primengConfig: PrimeNGConfig, private router: Router,
@@ -71,6 +73,32 @@ export class MainPageComponent implements OnInit {
     })
 
     this.primengConfig.ripple = true;
+  }
+
+  updateProducts() {
+    this.products = [];
+    this.filterDTO = new FilterDto();
+    this.filterDTO.minRange = this.rangeValues[0];
+    this.filterDTO.maxRange = this.rangeValues[1];
+    this.filterDTO.processor = this.selectedProcessors;
+    this.filterDTO.ram = this.selectedRAM;
+    this.filterDTO.memory = this.selectedMemory;
+    this.filterDTO.memoryCapacity = this.selectedMemoryCapacity;
+    console.log(this.selectedMemoryCapacity);
+
+    this.service.updateProducts(this.filterDTO).subscribe(data => {
+      console.log("Datele updated: ", data);
+      this.enableLoading();
+      data.forEach(data => {
+        this.products?.push(data);
+      })
+      console.log(this.products);
+      this.disableLoading();
+    }, error => {
+      console.log('Eroare la actualizarea produselor');
+    })
+
+    // this.service.refreshPage();
   }
 
   onSortChange(event :SortEvent) {
@@ -112,5 +140,28 @@ export class MainPageComponent implements OnInit {
     if (event != undefined) {
       this.showDetailsView = false;
     }
+  }
+
+  filterByName($event: Event) {
+    return ($event.target as HTMLInputElement).value;
+  }
+
+  sortByPrice(product1: ProductDto, product2: ProductDto) {
+    if (product1.price < product2.price) {
+      return -1;
+    } else if (product1.price > product2.price) {
+      return 1;
+    }
+    return 0;
+  }
+
+  sortByValue() {
+  if (this.sortOption === "Crescator") {
+    this.sortOrder = 1;
+    this.sortField = "price";
+  } else if (this.sortOption === "Descrescator") {
+    this.sortOrder = -1;
+    this.sortField = "price";
+  }
   }
 }

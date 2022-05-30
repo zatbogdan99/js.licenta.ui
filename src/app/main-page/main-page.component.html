@@ -11,132 +11,145 @@
           <!--              <p-dropdown style="padding-top: 1rem; padding-left: 2rem" [options]="sortOptions" placeholder="Sortare" (onChange)="onSortChange($event)"-->
           <!--                          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>-->
           <div class="p-field-radiobutton" style="padding-bottom: 1rem">
-            <p-radioButton value="Crescator" [(ngModel)]="sortOption" style="padding-right: 5px"></p-radioButton>
+            <p-radioButton value="Crescator" [(ngModel)]="sortOption" class="radio-button-padding" (onClick)="sortByValue()"></p-radioButton>
             <label>Crescator</label>
           </div>
           <div class="p-field-radiobutton">
-            <p-radioButton value="Descrescator" [(ngModel)]="sortOption" style="padding-right: 5px"></p-radioButton>
+            <p-radioButton value="Descrescator" [(ngModel)]="sortOption" class="radio-button-padding" (onClick)="sortByValue()"></p-radioButton>
             <label>Descrescator</label>
           </div>
         </p-panel>
 
         <p-panel header="Pret: {{rangeValues[0] + ' - ' + rangeValues[1]}}" class="panelStyle">
-          <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+          <p-slider [(ngModel)]="rangeValues" [range]="true" (onChange)="updateProducts()"></p-slider>
         </p-panel>
 
         <p-panel header="Producator Processor" class="panelStyle" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox style="padding-right: 8px" value="Intel" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="Intel" [(ngModel)]="selectedProcessors" (onChange)="updateProducts()"></p-checkbox>
             <label class="paddingLabelStyle">Intel</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" value="AMD" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="AMD" [(ngModel)]="selectedProcessors" (onChange)="updateProducts()"></p-checkbox>
             <label class="paddingLabelStyle">AMD</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" value="Apple" [(ngModel)]="selectedProcessors"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="Apple" [(ngModel)]="selectedProcessors" (onChange)="updateProducts()"></p-checkbox>
             <label class="paddingLabelStyle">Apple</label>
           </div>
         </p-panel>
 
         <p-panel header="Tip stocare" class="panelStyle" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="SSD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="SSD"
+                        [(ngModel)]="selectedMemory" (onChange)="updateProducts()"></p-checkbox>
             <label>SSD</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="HDD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="HDD"
+                        [(ngModel)]="selectedMemory" (onChange)="updateProducts()"></p-checkbox>
             <label>HDD</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="SSHD" [(ngModel)]="selectedMemory"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="SSHD"
+                        [(ngModel)]="selectedMemory" (onChange)="updateProducts()"></p-checkbox>
             <label>SSHD</label>
           </div>
         </p-panel>
 
         <p-panel header="Capacitate memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="256" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="256"
+                        [(ngModel)]="selectedMemoryCapacity" (onChange)="updateProducts()"></p-checkbox>
             <label>256 GB</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="512" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="512"
+                        [(ngModel)]="selectedMemoryCapacity" (onChange)="updateProducts()"></p-checkbox>
             <label>512 GB</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="1024" [(ngModel)]="selectedMemoryCapacity"></p-checkbox>
+            <p-checkbox class="checkbox-padding" value="1024"
+                        [(ngModel)]="selectedMemoryCapacity" (onChange)="updateProducts()"></p-checkbox>
             <label>1 TB</label>
           </div>
         </p-panel>
 
         <p-panel header="Tip memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="DDDR2" [(ngModel)]="selectedRAM"></p-checkbox>
+            <p-checkbox class="paddingRightStyle" value="DDDR2"
+                        [(ngModel)]="selectedRAM" (onChange)="updateProducts()"></p-checkbox>
             <label>DDR2</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="DDR3" [(ngModel)]="selectedRAM"></p-checkbox>
+            <p-checkbox class="paddingRightStyle" value="DDR3"
+                        [(ngModel)]="selectedRAM" (onChange)="updateProducts()"></p-checkbox>
             <label>DDR3</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox style="padding-right: 8px" class="paddingRightStyle" value="DDR4" [(ngModel)]="selectedRAM"></p-checkbox>
+            <p-checkbox class="paddingRightStyle" value="DDR4"
+                        [(ngModel)]="selectedRAM" (onChange)="updateProducts()"></p-checkbox>
             <label>DDR4</label>
           </div>
         </p-panel>
       </div>
     </ng-template>
     <ng-template pTemplate>
-      <p-dataView #dv [value]="products" [lazy]="true" [paginator]="true" [rows]="40" layout="grid">
-        <ng-template pTemplate="header">
-          <div class="inline-flex">
-            <!--                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
-          </div>
-          <p-button class="p-button-primary" label="Reîncarcă lista" icon="pi pi-refresh" iconPos="left"
-                    (click)="getAllProducts()"></p-button>
-          <p-button class="p-button-primary" style="padding-right: 10px" label="Adăugare produs"
-                    (click)="addProduct()"></p-button>
-          <p-button class="p-button-primary" style="padding-right: 10px" label="Filtrare"
-                    (click)="showFilters()"></p-button>
-          <div class="p-input-icon-left p-mb-2 p-mb-md-0">
-            <i class="pi pi-search"></i>
-            <input type="search" pInputText placeholder="Căutare">
-          </div>
-        </ng-template>
-        <ng-template let-product pTemplate="gridItem">
-          <div class="p-col-12 p-md-4">
-            <div class="product-grid-item card" style="width: 28rem">
-              <div class="product-grid-item-content" style="text-align: center">
-                <div class="product-name"
-                     style="text-align: center; padding-bottom: 12px">{{product.productType + " " + product.name}}</div>
-                <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="250" height="250"
-                         [preview]="true"></p-image>
-                <div (click)="moveToDetailedView(product)" class="product-description" style="text-align: left">{{product.description}}</div>
-              </div>
-              <div class="product-grid-item-bottom">
-                <span class="product-price">${{product.price}}</span>
-                <p-chip class="stock-style" label="În stock" styleClass="p-mr-2 custom-chip"></p-chip>
-                <p-button class="shopping-cart" icon="pi pi-shopping-cart"></p-button>
+      <div style="width: 94rem">
+        <p-dataView #dv [value]="products" [paginator]="true" [rows]="40" layout="grid" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder">
+          <ng-template pTemplate="header">
+            <div class="inline-flex">
+              <!--                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
+            </div>
+            <p-button class="p-button-primary" label="Reîncarcă lista" icon="pi pi-refresh" iconPos="left"
+                      (click)="getAllProducts()"></p-button>
+            <p-button class="p-button-primary big-padding" label="Adăugare produs"
+                      (click)="addProduct()"></p-button>
+            <p-button class="p-button-primary big-padding" label="Filtrare"
+                      (click)="showFilters()"></p-button>
+            <div class="p-input-icon-left p-mb-2 p-mb-md-0">
+              <i class="pi pi-search"></i>
+              <input type="search" pInputText placeholder="Căutare" (input)="dv.filter(filterByName($event))">
+            </div>
+          </ng-template>
+          <ng-template let-product pTemplate="gridItem">
+            <div class="p-col-12 p-md-4">
+              <div class="product-grid-item card" style="width: 28rem">
+                <div class="product-grid-item-content" style="text-align: center">
+                  <div class="product-name"
+                       style="text-align: center; padding-bottom: 12px">{{product.productType + " " + product.name}}</div>
+                  <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="250" height="250"
+                           [preview]="true"></p-image>
+                  <div (click)="moveToDetailedView(product)" class="product-description"
+                       style="text-align: left">{{product.description}}</div>
+                </div>
+                <div class="product-grid-item-bottom">
+                  <span class="product-price">${{product.price}}</span>
+                  <p-chip class="stock-style" label="În stoc" styleClass="p-mr-2 custom-chip"></p-chip>
+                  <p-button class="shopping-cart" icon="pi pi-shopping-cart"></p-button>
+                </div>
               </div>
             </div>
-          </div>
-        </ng-template>
-        <ng-template let-product pTemplate="listItem">
-          <div class="p-col-12">
-            <div class="product-list-item">
-              <div class="product-list-detail">
-                <div class="product-name">{{product.name}}</div>
-                <div class="product-description">{{product.description}}</div>
+          </ng-template>
+          <ng-template let-product pTemplate="listItem">
+            <div class="p-col-12">
+              <div class="product-list-item">
+                <div class="product-list-detail">
+                  <div class="product-name">{{product.name}}</div>
+                  <div class="product-description">{{product.description}}</div>
+                </div>
               </div>
             </div>
-          </div>
-        </ng-template>
-      </p-dataView>
+          </ng-template>
+        </p-dataView>
+      </div>
     </ng-template>
   </p-splitter>
 
-<div style="background: none">
-  <app-detailed-view (eventEmitter)="backToList($event)" [product]="selectedProduct" *ngIf="showDetailsView"></app-detailed-view>
-</div>
+  <div style="background: none">
+    <app-detailed-view (eventEmitter)="backToList($event)" [product]="selectedProduct"
+                       *ngIf="showDetailsView"></app-detailed-view>
+  </div>
 
   <img src="assets/logo1.png" alt="Logo"
        style="width: 10%; height: auto; position: relative; bottom: 0; display: block; float: right">

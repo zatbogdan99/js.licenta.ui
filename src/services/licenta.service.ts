@@ -1,23 +1,34 @@
 import {Inject, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {LaptopDto} from "../dto/laptop.dto";
 import {ProductDto} from "../dto/product.dto";
 import {SaveLaptopModel} from "../dto/save-laptop.model";
 import {SaveGraphicsCardDto} from "../dto/save-graphics-card.dto";
 import {SaveProcessorDTO} from "../dto/save-processor.dto";
 import {SaveDisplayDto} from "../dto/save-display.dto";
+import {FilterDto} from "../dto/filter.dto";
 
 @Injectable({
   providedIn: 'root',
 })
 export class LicentaService {
+  subjectNotifier: Subject<null> = new Subject<null>();
+
   constructor(private http: HttpClient) {
 
   }
 
+  refreshPage() {
+    this.subjectNotifier.next(null);
+  }
+
   public getAllProducts(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl(""));
+  }
+
+  public updateProducts(filters: FilterDto): Observable<Array<ProductDto>> {
+    return this.http.post<Array<ProductDto>>(this.getUrl("update-products"), filters);
   }
 
   public getLaptop(id: number): Observable<LaptopDto> {
