@@ -16,7 +16,7 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product ===3">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5">
       <h4 style="margin-bottom: 0">Nume</h4>
       <input type="text" pInputText [(ngModel)]="name">
       <span style="padding-bottom: 20px"></span>
@@ -68,28 +68,41 @@
 
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
       <h4 style="margin-bottom: 0">Stocare</h4>
-      <p-dropdown [options]="stocare" (onChange)="onChange()" [(ngModel)]="storageType" optionLabel="product"
+      <p-dropdown [options]="storages" (onChange)="onChange()" [(ngModel)]="selectedStorage" optionLabel="product"
                   optionValue="value" placeholder="Selectează stocare"></p-dropdown>
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-<!--    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">-->
-<!--      <h4 style="margin-bottom: 0">Capacitate Stocare</h4>-->
-<!--      <input type="text" pInputText [(ngModel)]="storageCapacity">-->
-<!--      &lt;!&ndash;    <span class="p-ml-2"></span>&ndash;&gt;-->
-<!--    </div>-->
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 5">
+      <h4 style="margin-bottom: 0">Garantie</h4>
+      <input type="text" pInputText [(ngModel)]="storageWarranty">
+    </div>
 
-<!--    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">-->
-<!--      <h4 style="margin-bottom: 0">Interfata stocare</h4>-->
-<!--      <input type="text" pInputText [(ngModel)]="storageInterface">-->
-<!--      &lt;!&ndash;    <span class="p-ml-2"></span>&ndash;&gt;-->
-<!--    </div>-->
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 5">
+      <h4 style="margin-bottom: 0">Capacitate Stocare</h4>
+      <input type="text" pInputText [(ngModel)]="storageCapacity">
+    </div>
 
-<!--    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">-->
-<!--      <h4 style="margin-bottom: 0">FORM FACTOR stocare</h4>-->
-<!--      <input type="text" pInputText [(ngModel)]="storageFormFactor">-->
-<!--      &lt;!&ndash;    <span class="p-ml-2"></span>&ndash;&gt;-->
-<!--    </div>-->
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 5">
+      <h4 style="margin-bottom: 0">Tip de stocare</h4>
+      <input type="text" pInputText [(ngModel)]="storageType">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 5">
+      <h4 style="margin-bottom: 0">Interfata stocare</h4>
+      <input type="text" pInputText [(ngModel)]="storageInterface">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 5">
+      <h4 style="margin-bottom: 0">FORM FACTOR stocare</h4>
+      <input type="text" pInputText [(ngModel)]="storageFormFactor">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 5">
+      <h4 style="margin-bottom: 0">Viteza HDD</h4>
+      <input type="text" pInputText [(ngModel)]="speed">
+    </div>
+
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
       <h4 style="margin-bottom: 0">Pret</h4>
       <input type="text" pInputText [(ngModel)]="price">
@@ -99,7 +112,7 @@
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
       <h4 style="margin-bottom: 0">Placa Video</h4>
       <p-dropdown [options]="graphicsCards" (onChange)="onChange()" optionLabel="product"
-                  optionValue="value" placeholder="Selectează stocare"></p-dropdown>
+                  optionValue="value" placeholder="Selectează placă video"></p-dropdown>
     </div>
 
 
@@ -228,7 +241,7 @@
 
   <div class="p-field p-col-6 p-md-2" *ngIf="product === 1">
     <h4 style="margin-bottom: 0">Poza</h4>
-    <p-fileUpload accept="image/*" (onSelect)="onSelect($event)"></p-fileUpload>
+    <p-fileUpload accept="image/*" (onSelect)="onSelect($event)" [multiple]="true"></p-fileUpload>
     <span class="p-ml-2"></span>
   </div>
 

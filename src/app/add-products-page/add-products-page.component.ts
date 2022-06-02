@@ -7,6 +7,8 @@ import {SaveProcessorDTO} from "../../dto/save-processor.dto";
 import {core} from "@angular/compiler";
 import {MessageService} from "primeng/api";
 import {SaveDisplayDto} from "../../dto/save-display.dto";
+import {ProductDto} from "../../dto/product.dto";
+import {SaveStorageDto} from "../../dto/save-storage.dto";
 
 class Product {
   product: string;
@@ -29,7 +31,8 @@ export class AddProductsPageComponent implements OnInit {
     {product: "Laptop", value: 1},
     {product: "Placa video", value: 2},
     {product: "Procesor", value: 3},
-    {product: "Display", value: 4}
+    {product: "Display", value: 4},
+    {product: "Storage", value: 5}
   ]
   processors: Product[] = [];
 
@@ -41,18 +44,14 @@ export class AddProductsPageComponent implements OnInit {
     {product: "Memorie KINGSTON, 16GB DDR4, 3200Mhz, CL22", value: 5}
   ]
 
-  stocare: Product[] = [
-    {product: "SSD KINGSTON A400, 240 Gb, SATA III, 2.5 inch", value: 1},
-    {product: "SSD Samsung EVO 970, 1 Tb, M.2 PCI Express 3.0 x4, form factor 2280", value: 2},
-    {product: "SSD KINGSTON NV1, 250 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 3},
-    {product: "SSD ADATA Swordfish, 500 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 4}
+  storages: Product[] = [
+    // {product: "SSD KINGSTON A400, 240 Gb, SATA III, 2.5 inch", value: 1},
+    // {product: "SSD Samsung EVO 970, 1 Tb, M.2 PCI Express 3.0 x4, form factor 2280", value: 2},
+    // {product: "SSD KINGSTON NV1, 250 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 3},
+    // {product: "SSD ADATA Swordfish, 500 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 4}
   ]
 
-  graphicsCards: Product[] = [
-    {product: "Nvidia GeForce GTX 1660 Ti 6GB", value: 1},
-    {product: "Nvidia GeForce RTX 2060 6GB ", value: 2},
-    {product: "Nvidia GeForce GTX 1050 4GB", value: 3}
-  ]
+  graphicsCards: Product[] = [];
   displays: Product[] = [];
   loading: boolean = false;
   product: number = 1
@@ -60,6 +59,7 @@ export class AddProductsPageComponent implements OnInit {
   graphicsCardDTO: SaveGraphicsCardDto;
   processorDTO: SaveProcessorDTO;
   displayDTO: SaveDisplayDto;
+  storageDTO: SaveStorageDto;
   name: string;
   waranty: number;
   display: number;
@@ -96,11 +96,9 @@ export class AddProductsPageComponent implements OnInit {
   refreshRate: number;
   resolution: string;
   screenSize: number;
-
-
-
-
-
+  selectedStorage: ProductDto;
+  speed: number;
+  storageWarranty: number;
 
   constructor(private service: LicentaService, private messageService: MessageService) { }
 
@@ -121,6 +119,24 @@ export class AddProductsPageComponent implements OnInit {
       let i = 1;
       data.forEach(p => {
         this.processors.push(new Product(p.description, i++));
+      })
+      this.disableLoading();
+    });
+
+    this.enableLoading();
+    this.service.getGraphicCards().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.graphicsCards.push(new Product(p.description, i++));
+      })
+      this.disableLoading();
+    });
+
+    this.enableLoading();
+    this.service.getStorage().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.storages.push(new Product(p.description, i++));
       })
       this.disableLoading();
     });
@@ -176,6 +192,9 @@ export class AddProductsPageComponent implements OnInit {
         this.saveDisplay();
         break;
       }
+      case 5: {
+        this.saveStorage();
+      }
     }
   }
 
@@ -217,6 +236,22 @@ export class AddProductsPageComponent implements OnInit {
     this.messageService.add({severity: 'info', summary: 'Procesor salvat cu succes!', detail: ''});
   }
 
+  private saveStorage() {
+    this.storageDTO = new SaveStorageDto();
+    this.storageDTO.name = this.name;
+    this.storageDTO.storage_interface = this.storageInterface;
+    this.storageDTO.type = this.storageType;
+    this.storageDTO.capacity = this.storageCapacity;
+    this.storageDTO.warranty = this.storageWarranty;
+    this.storageDTO.speed = this.speed;
+
+    this.service.saveStorage(this.storageDTO).subscribe(() => {
+      console.log("Saved storage");
+    })
+
+    this.messageService.add({severity: 'info', summary: 'SSD/HDD salvat cu succes!', detail: ''});
+  }
+
   private saveDisplay() {
     this.displayDTO = new SaveDisplayDto();
     this.displayDTO.gsync = this.gsync;
@@ -247,6 +282,7 @@ export class AddProductsPageComponent implements OnInit {
         console.log('In on reload', this.uploadedFiles);
       };
     }
+    console.log(this.uploadedFiles);
   }
 
   enableLoading() {

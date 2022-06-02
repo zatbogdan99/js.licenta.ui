@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Injectable, OnInit} from '@angular/core';
 import {LicentaService} from "../../services/licenta.service";
 import {HttpClient} from "@angular/common/http";
 import {ProductDto} from "../../dto/product.dto";
@@ -47,6 +47,7 @@ export class MainPageComponent implements OnInit {
               public dialogService: DialogService, private sanitization: DomSanitizer) {
     //TODO de facut asta cu resolver
     this.getAllProducts();
+    // this.ref.detectChanges();
     console.log('toate produsele: ', this.products);
   }
 
@@ -61,8 +62,8 @@ export class MainPageComponent implements OnInit {
 
   getAllProducts() {
     this.products = [];
+    this.enableLoading();
     this.service.getAllProducts().subscribe(data => {
-      this.enableLoading();
       data.forEach(data => {
         this.products?.push(data);
       })
@@ -86,9 +87,9 @@ export class MainPageComponent implements OnInit {
     this.filterDTO.memoryCapacity = this.selectedMemoryCapacity;
     console.log(this.selectedMemoryCapacity);
 
+    this.enableLoading();
     this.service.updateProducts(this.filterDTO).subscribe(data => {
       console.log("Datele updated: ", data);
-      this.enableLoading();
       data.forEach(data => {
         this.products?.push(data);
       })

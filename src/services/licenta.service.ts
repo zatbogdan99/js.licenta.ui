@@ -8,6 +8,7 @@ import {SaveGraphicsCardDto} from "../dto/save-graphics-card.dto";
 import {SaveProcessorDTO} from "../dto/save-processor.dto";
 import {SaveDisplayDto} from "../dto/save-display.dto";
 import {FilterDto} from "../dto/filter.dto";
+import {SaveStorageDto} from "../dto/save-storage.dto";
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +53,7 @@ export class LicentaService {
   }
 
   public saveDisplay(display: SaveDisplayDto) {
-    return this.http.post<SaveProcessorDTO>(this.getUrl("save-display"), display);
+    return this.http.post<SaveDisplayDto>(this.getUrl("save-display"), display);
   }
 
   public getDisplays(): Observable<Array<ProductDto>> {
@@ -61,5 +62,17 @@ export class LicentaService {
 
   public getProcessors(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-processors"));
+  }
+
+  public getGraphicCards(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-graphic-cards"));
+  }
+
+  public getStorage(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-storage"));
+  }
+
+  public saveStorage(storageDTO: SaveStorageDto) {
+    return this.http.post<SaveStorageDto>(this.getUrl("save-storage"), storageDTO);
   }
 }

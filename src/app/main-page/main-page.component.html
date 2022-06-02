@@ -1,4 +1,4 @@
-<div *ngIf="!loading" style="background: aliceblue">
+<div *ngIf="!loading">
   <img src="assets/logo2.png" alt="Logo"
        style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
   <div style="padding: 30px;">
@@ -21,7 +21,7 @@
         </p-panel>
 
         <p-panel header="Pret: {{rangeValues[0] + ' - ' + rangeValues[1]}}" class="panelStyle">
-          <p-slider [(ngModel)]="rangeValues" [range]="true" (onChange)="updateProducts()"></p-slider>
+          <p-slider [min]="0" [max]="5000" [(ngModel)]="rangeValues" [range]="true" (onSlideEnd)="updateProducts()"></p-slider>
         </p-panel>
 
         <p-panel header="Producator Processor" class="panelStyle" [toggleable]="true">
@@ -96,7 +96,7 @@
     </ng-template>
     <ng-template pTemplate>
       <div style="width: 94rem">
-        <p-dataView #dv [value]="products" [paginator]="true" [rows]="40" layout="grid" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder">
+        <p-dataView #dv [value]="products" [paginator]="true" [rows]="40" layout="grid" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading">
           <ng-template pTemplate="header">
             <div class="inline-flex">
               <!--                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
