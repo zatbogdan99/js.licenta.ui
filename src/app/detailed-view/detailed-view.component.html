@@ -1,9 +1,13 @@
 <div style="background: white">
   <div class="center">
     <h3 style="padding-top: 5rem">{{product.name}}</h3>
-    <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="400" height="400"
-             [preview]="true">
-    </p-image>
+    <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [showIndicators]="true">
+      <ng-template pTemplate="item" let-item>
+        <p-image [src]="'data:image/jpeg;base64,' + item" alt="Image" width="400" height="400"
+                 [preview]="true">
+        </p-image>
+      </ng-template>
+    </p-galleria>
   </div>
   <h3 class="center">Pret: {{product.price}} EURO</h3>
   <p-button class="center" style="padding-bottom: 10px" label="Inapoi la lista" (onClick)="backToList()"></p-button>

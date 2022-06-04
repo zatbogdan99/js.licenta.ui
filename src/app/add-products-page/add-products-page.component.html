@@ -16,15 +16,15 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5 || product === 6">
       <h4 style="margin-bottom: 0">Nume</h4>
       <input type="text" pInputText [(ngModel)]="name">
       <span style="padding-bottom: 20px"></span>
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 6">
       <h4 style="margin-bottom: 0">Garanție</h4>
-      <input type="text" pInputText [(ngModel)]="waranty">
+      <input type="text" pInputText [(ngModel)]="warranty">
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
@@ -42,28 +42,40 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-<!--    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">-->
-<!--      <h4 style="margin-bottom: 0">RAM total</h4>-->
-<!--      <input type="text" pInputText [(ngModel)]="ramTotal">-->
-<!--      &lt;!&ndash;    <span class="p-ml-2"></span>&ndash;&gt;-->
-<!--    </div>-->
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6">
+      <h4 style="margin-bottom: 0">RAM total</h4>
+      <input type="text" pInputText [(ngModel)]="ramTotal">
+    </div>
 
-<!--    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">-->
-<!--      <h4 style="margin-bottom: 0">Tip de RAM</h4>-->
-<!--      <input type="text" pInputText [(ngModel)]="ramType">-->
-<!--      &lt;!&ndash;    <span class="p-ml-2"></span>&ndash;&gt;-->
-<!--    </div>-->
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6">
+      <h4 style="margin-bottom: 0">Tip de RAM</h4>
+      <input type="text" pInputText [(ngModel)]="ramType">
+    </div>
 
-<!--    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">-->
-<!--      <h4 style="margin-bottom: 0">Frecventa RAM</h4>-->
-<!--      <input type="text" pInputText [(ngModel)]="ramFrequency">-->
-<!--      &lt;!&ndash;    <span class="p-ml-2"></span>&ndash;&gt;-->
-<!--    </div>-->
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6">
+      <h4 style="margin-bottom: 0">Frecventa RAM</h4>
+      <input type="text" pInputText [(ngModel)]="ramFrequency">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6">
+      <h4 style="margin-bottom: 0">Format RAM</h4>
+      <input type="text" pInputText [(ngModel)]="ramFormat">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6">
+      <h4 style="margin-bottom: 0">Pentru laptop?</h4>
+      <input type="text" pInputText [(ngModel)]="ramForLaptop">
+    </div>
 
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
       <h4 style="margin-bottom: 0">Memorie RAM</h4>
-      <p-dropdown [options]="rams" (onChange)="onChange()" [(ngModel)]="ramType" optionLabel="product"
+      <p-dropdown [options]="rams" (onChange)="onChange()" [(ngModel)]="ram" optionLabel="product"
                   optionValue="value" placeholder="Selectează memoria RAM"></p-dropdown>
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
+      <h4 style="margin-bottom: 0">Sloturi RAM</h4>
+      <input type="text" pInputText [(ngModel)]="ramSlots">
     </div>
 
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
@@ -111,7 +123,7 @@
 
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
       <h4 style="margin-bottom: 0">Placa Video</h4>
-      <p-dropdown [options]="graphicsCards" (onChange)="onChange()" optionLabel="product"
+      <p-dropdown [options]="graphicsCards" [(ngModel)]="graphicsCard" (onChange)="onChange()" optionLabel="product"
                   optionValue="value" placeholder="Selectează placă video"></p-dropdown>
     </div>
 

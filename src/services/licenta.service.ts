@@ -9,6 +9,8 @@ import {SaveProcessorDTO} from "../dto/save-processor.dto";
 import {SaveDisplayDto} from "../dto/save-display.dto";
 import {FilterDto} from "../dto/filter.dto";
 import {SaveStorageDto} from "../dto/save-storage.dto";
+import {SaveRamDto} from "../dto/save-ram.dto";
+import {PhotosDto} from "../dto/photos.dto";
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +38,10 @@ export class LicentaService {
     return this.http.post<LaptopDto>(this.getUrl("get-laptop"), id);
   }
 
+  public getPhotos(id: number): Observable<PhotosDto> {
+    return this.http.post<PhotosDto>(this.getUrl("get-photos"), id);
+  }
+
   public saveLaptop(laptop: SaveLaptopModel) {
     return this.http.post<SaveLaptopModel>(this.getUrl("save-laptop"), laptop);
   }
@@ -45,7 +51,7 @@ export class LicentaService {
   }
 
   private getUrl(path: string): string {
-    return  "http://localhost:8080/" + path;
+    return  "http://localhost:8081/" + path;
   }
 
   public saveProcessor(processor: SaveProcessorDTO) {
@@ -54,6 +60,10 @@ export class LicentaService {
 
   public saveDisplay(display: SaveDisplayDto) {
     return this.http.post<SaveDisplayDto>(this.getUrl("save-display"), display);
+  }
+
+  public saveRam(ram: SaveRamDto) {
+    return this.http.post<SaveRamDto>(this.getUrl("save-ram"), ram);
   }
 
   public getDisplays(): Observable<Array<ProductDto>> {
@@ -70,6 +80,10 @@ export class LicentaService {
 
   public getStorage(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-storage"));
+  }
+
+  public getRam(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-ram"));
   }
 
   public saveStorage(storageDTO: SaveStorageDto) {

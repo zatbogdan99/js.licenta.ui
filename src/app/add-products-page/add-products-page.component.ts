@@ -9,12 +9,25 @@ import {MessageService} from "primeng/api";
 import {SaveDisplayDto} from "../../dto/save-display.dto";
 import {ProductDto} from "../../dto/product.dto";
 import {SaveStorageDto} from "../../dto/save-storage.dto";
+import {SaveRamDto} from "../../dto/save-ram.dto";
 
 class Product {
   product: string;
   value: number;
+  productId: number;
 
-  constructor(product: string, value: number) {
+  constructor(product: string, value: number, productId: number) {
+    this.product = product;
+    this.value = value;
+    this.productId = productId;
+  }
+}
+
+class GeneralProduct {
+  product: string;
+  value: number;
+
+  constructor(product: string, value: number, productId: number) {
     this.product = product;
     this.value = value;
   }
@@ -27,29 +40,19 @@ class Product {
 })
 export class AddProductsPageComponent implements OnInit {
 
-  products: Product[] = [
+  products: GeneralProduct[] = [
     {product: "Laptop", value: 1},
     {product: "Placa video", value: 2},
     {product: "Procesor", value: 3},
     {product: "Display", value: 4},
-    {product: "Storage", value: 5}
+    {product: "Storage", value: 5},
+    {product: "Ram", value: 6}
   ]
   processors: Product[] = [];
 
-  rams: Product[] = [
-    {product: "Memorie RAM ADATA Premiere, 16GB DDR4, 3200Mhz, SODIMM", value: 1},
-    {product: "Memorie KINGSTON FURY, 8GB DDR4, 2666Mhz, CL15", value: 2},
-    {product: "Memorie Crucial, 16GB DDR4, 3200 Mhz, CL22", value: 3},
-    {product: "Memorie Patriot, 16GB DDR4, 3200 Mhz, CL22", value: 4},
-    {product: "Memorie KINGSTON, 16GB DDR4, 3200Mhz, CL22", value: 5}
-  ]
+  rams: Product[] = []
 
-  storages: Product[] = [
-    // {product: "SSD KINGSTON A400, 240 Gb, SATA III, 2.5 inch", value: 1},
-    // {product: "SSD Samsung EVO 970, 1 Tb, M.2 PCI Express 3.0 x4, form factor 2280", value: 2},
-    // {product: "SSD KINGSTON NV1, 250 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 3},
-    // {product: "SSD ADATA Swordfish, 500 GB, M.2 PCI Express 3.0 x4, form factor 2280", value: 4}
-  ]
+  storages: Product[] = []
 
   graphicsCards: Product[] = [];
   displays: Product[] = [];
@@ -59,11 +62,13 @@ export class AddProductsPageComponent implements OnInit {
   graphicsCardDTO: SaveGraphicsCardDto;
   processorDTO: SaveProcessorDTO;
   displayDTO: SaveDisplayDto;
+  ramDTO: SaveRamDto;
   storageDTO: SaveStorageDto;
   name: string;
-  waranty: number;
+  warranty: number;
   display: number;
   processor: number;
+  ram: number;
   ramTotal: number;
   ramType: string;
   ramFrequency: number;
@@ -96,9 +101,12 @@ export class AddProductsPageComponent implements OnInit {
   refreshRate: number;
   resolution: string;
   screenSize: number;
-  selectedStorage: ProductDto;
+  selectedStorage: number;
   speed: number;
   storageWarranty: number;
+  ramFormat: string;
+  ramForLaptop: number;
+
 
   constructor(private service: LicentaService, private messageService: MessageService) { }
 
@@ -108,7 +116,7 @@ export class AddProductsPageComponent implements OnInit {
     this.service.getDisplays().subscribe(data => {
       let i = 1;
       data.forEach(p => {
-        this.displays.push(new Product(p.description, i++));
+        this.displays.push(new Product(p.description, i++, p.id));
       })
       this.disableLoading();
     });
@@ -118,7 +126,7 @@ export class AddProductsPageComponent implements OnInit {
     this.service.getProcessors().subscribe(data => {
       let i = 1;
       data.forEach(p => {
-        this.processors.push(new Product(p.description, i++));
+        this.processors.push(new Product(p.description, i++, p.id));
       })
       this.disableLoading();
     });
@@ -127,7 +135,7 @@ export class AddProductsPageComponent implements OnInit {
     this.service.getGraphicCards().subscribe(data => {
       let i = 1;
       data.forEach(p => {
-        this.graphicsCards.push(new Product(p.description, i++));
+        this.graphicsCards.push(new Product(p.description, i++, p.id));
       })
       this.disableLoading();
     });
@@ -136,7 +144,16 @@ export class AddProductsPageComponent implements OnInit {
     this.service.getStorage().subscribe(data => {
       let i = 1;
       data.forEach(p => {
-        this.storages.push(new Product(p.description, i++));
+        this.storages.push(new Product(p.description, i++, p.id));
+      })
+      this.disableLoading();
+    });
+
+    this.enableLoading();
+    this.service.getRam().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.rams.push(new Product(p.description, i++, p.id));
       })
       this.disableLoading();
     });
@@ -147,18 +164,14 @@ export class AddProductsPageComponent implements OnInit {
   saveLaptop() {
     this.laptop = new SaveLaptopModel();
     this.laptop.name = this.name;
-    this.laptop.waranty = this.waranty;
+    this.laptop.warranty = this.warranty;
     this.laptop.display = this.display;
-    this.laptop.processor = this.processor;
-    this.laptop.ramTotal = this.ramTotal;
-    this.laptop.ramType = this.ramType;
-    this.laptop.ramFrequency = this.ramFrequency;
-    this.laptop.ramSlots = this.ramSlots;
-    this.laptop.storage = this.storageType;
-    this.laptop.storageCapacity = this.storageCapacity;
-    this.laptop.storageInterface = this.storageInterface;
-    this.laptop.storageFormFactor = this.storageFormFactor;
-    this.laptop.graphicsCard = this.graphicsCard;
+    this.laptop.processor = this.processors[this.processor - 1].productId;
+    this.laptop.ram = this.rams[this.ram - 1].productId;
+    this.laptop.storage = this.storages[this.selectedStorage - 1].productId;
+    console.log(this.graphicsCard);
+    console.log(this.graphicsCards);
+    this.laptop.graphicsCard = this.graphicsCards[this.graphicsCard - 1].productId;
     this.laptop.price = this.price;
     this.laptop.photos = this.uploadedFiles;
 
@@ -194,6 +207,11 @@ export class AddProductsPageComponent implements OnInit {
       }
       case 5: {
         this.saveStorage();
+        break;
+      }
+      case 6: {
+        this.saveRam();
+        break;
       }
     }
   }
@@ -266,6 +284,23 @@ export class AddProductsPageComponent implements OnInit {
     })
 
     this.messageService.add({severity: 'info', summary: 'Display salvat cu succes!', detail: ''});
+  }
+
+  private saveRam() {
+    this.ramDTO = new SaveRamDto();
+    this.ramDTO.name = this.name;
+    this.ramDTO.warranty = this.warranty;
+    this.ramDTO.type = this.ramType;
+    this.ramDTO.format = this.ramFormat;
+    this.ramDTO.forLaptop = this.ramForLaptop;
+    this.ramDTO.frequency = this.ramFrequency
+    this.ramDTO.total = this.ramTotal;
+
+    this.service.saveRam(this.ramDTO).subscribe(() => {
+      console.log("Saved ram");
+    })
+
+    this.messageService.add({severity: 'info', summary: 'RAM salvat cu succes!', detail: ''});
   }
 
   onSelect(event: any) {

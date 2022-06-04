@@ -12,3 +12,7 @@
 .rightToPhoto {
 
 }
+
+.p-galleria .p-galleria-item-nav {
+  color: black !important;
+}

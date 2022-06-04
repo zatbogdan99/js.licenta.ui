@@ -45,7 +45,6 @@ export class MainPageComponent implements OnInit {
   constructor(private service: LicentaService, private http: HttpClient,
               private primengConfig: PrimeNGConfig, private router: Router,
               public dialogService: DialogService, private sanitization: DomSanitizer) {
-    //TODO de facut asta cu resolver
     this.getAllProducts();
     // this.ref.detectChanges();
     console.log('toate produsele: ', this.products);

@@ -37,6 +37,7 @@ import {SliderModule} from "primeng/slider";
 import { DetailedViewComponent } from './detailed-view/detailed-view.component';
 import {AccordionModule} from "primeng/accordion";
 import {ChipModule} from "primeng/chip";
+import {GalleriaModule} from "primeng/galleria";
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import {ChipModule} from "primeng/chip";
         RadioButtonModule,
         SliderModule,
         AccordionModule,
-        ChipModule
+        ChipModule,
+        GalleriaModule
     ],
   providers: [MessageService],
   bootstrap: [AppComponent]
