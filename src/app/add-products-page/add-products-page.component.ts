@@ -10,6 +10,7 @@ import {SaveDisplayDto} from "../../dto/save-display.dto";
 import {ProductDto} from "../../dto/product.dto";
 import {SaveStorageDto} from "../../dto/save-storage.dto";
 import {SaveRamDto} from "../../dto/save-ram.dto";
+import {SaveMotherboardDto} from "../../dto/save-motherboard.dto";
 
 class Product {
   product: string;
@@ -46,13 +47,16 @@ export class AddProductsPageComponent implements OnInit {
     {product: "Procesor", value: 3},
     {product: "Display", value: 4},
     {product: "Storage", value: 5},
-    {product: "Ram", value: 6}
+    {product: "Ram", value: 6},
+    {product: "Motherboard", value: 7}
   ]
   processors: Product[] = [];
 
-  rams: Product[] = []
+  rams: Product[] = [];
 
-  storages: Product[] = []
+  motherboards: Product[] = [];
+
+  storages: Product[] = [];
 
   graphicsCards: Product[] = [];
   displays: Product[] = [];
@@ -60,6 +64,7 @@ export class AddProductsPageComponent implements OnInit {
   product: number = 1
   laptop: SaveLaptopModel;
   graphicsCardDTO: SaveGraphicsCardDto;
+  motherboardDTO: SaveMotherboardDto;
   processorDTO: SaveProcessorDTO;
   displayDTO: SaveDisplayDto;
   ramDTO: SaveRamDto;
@@ -106,6 +111,40 @@ export class AddProductsPageComponent implements OnInit {
   storageWarranty: number;
   ramFormat: string;
   ramForLaptop: number;
+  processorForLaptop: number;
+  motherboardFormat: string;
+  cpuSocket: number;
+  chipsetProducer: string;
+  chipsetModel: string;
+  supportedCpus: string;
+  graphicalInterface: string;
+  audioIntegrated: string;
+  chipsetAudio: string;
+  integratedNetworkCard: string;
+  networkChipset: string;
+  sata3Slots: number;
+  m2Ports: number;
+  motherboardRamType: string;
+  maxRam: number;
+  motherboardRamSlots: number;
+  supportedFrequencies: string;
+  pciExpress40x16: number;
+  pciExpress30x16: number;
+  pciExpressX1: number;
+  hdmi: number;
+  displayPort: number;
+  usb20: number;
+  usb32Gen1TypeA: number;
+  usb32Gen2TypeA: number;
+  usb43Gen2TypeC: number;
+  rj45Lan: number;
+  audioJack: number;
+  dvi: number;
+  vga: number;
+  ps2Mouse: number;
+  ps2Keyboard: number;
+
+
 
 
   constructor(private service: LicentaService, private messageService: MessageService) { }
@@ -154,6 +193,15 @@ export class AddProductsPageComponent implements OnInit {
       let i = 1;
       data.forEach(p => {
         this.rams.push(new Product(p.description, i++, p.id));
+      })
+      this.disableLoading();
+    });
+
+    this.enableLoading();
+    this.service.getMotherboard().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.motherboards.push(new Product(p.description, i++, p.id));
       })
       this.disableLoading();
     });
@@ -213,6 +261,10 @@ export class AddProductsPageComponent implements OnInit {
         this.saveRam();
         break;
       }
+      case 7: {
+        this.saveMotherboard();
+        break;
+      }
     }
   }
 
@@ -224,12 +276,61 @@ export class AddProductsPageComponent implements OnInit {
     this.graphicsCardDTO.model = this.model;
     this.graphicsCardDTO.chipset = this.chipset;
     this.graphicsCardDTO.technology = this.technology;
+    this.graphicsCardDTO.photos = this.uploadedFiles;
 
     this.service.saveGraphicsCard(this.graphicsCardDTO).subscribe(() => {
       console.log("Saved graphics card");
     })
 
     this.messageService.add({severity: 'info', summary: 'Placa video salvata cu succes!', detail: ''});
+  }
+
+  private saveMotherboard() {
+    this.motherboardDTO = new SaveMotherboardDto();
+    this.motherboardDTO.dvi = this.dvi;
+    this.motherboardDTO.name = this.name;
+    this.motherboardDTO.price = this.price;
+    this.motherboardDTO.format = this.motherboardFormat;
+    this.motherboardDTO.audioChipset = this.chipsetAudio;
+    this.motherboardDTO.audioIntegrated = this.audioIntegrated;
+    this.motherboardDTO.audioJack = this.audioJack;
+    this.motherboardDTO.chipsetModel = this.chipsetModel;
+    this.motherboardDTO.chipsetProducer = this.chipsetProducer;
+    this.motherboardDTO.cpuSocket = this.cpuSocket;
+    this.motherboardDTO.displayPort = this.displayPort;
+    this.motherboardDTO.graphicalInterface = this.graphicalInterface;
+    this.motherboardDTO.hdmi = this.hdmi;
+    this.motherboardDTO.integratedNetworkCard = this.integratedNetworkCard;
+    this.motherboardDTO.m2Ports = this.m2Ports;
+    this.motherboardDTO.maxRam = this.maxRam;
+    this.motherboardDTO.networkChipset = this.networkChipset;
+    this.motherboardDTO.pci_express_x1 = this.pciExpressX1;
+    this.motherboardDTO.pciExpress30x16 = this.pciExpress30x16;
+    this.motherboardDTO.pciExpress40x16 = this.pciExpress40x16;
+    this.motherboardDTO.ps2Keyboard = this.ps2Keyboard;
+    this.motherboardDTO.ps2Mouse = this.ps2Mouse;
+    this.motherboardDTO.photos = this.uploadedFiles;
+    this.motherboardDTO.vga = this.vga;
+    this.motherboardDTO.rj45Lan = this.rj45Lan;
+    this.motherboardDTO.usb20 = this.usb20;
+    this.motherboardDTO.usb32gen1TypeA = this.usb32Gen1TypeA;
+    this.motherboardDTO.usb32gen2TypeA = this.usb32Gen2TypeA;
+    this.motherboardDTO.usb32gen2TypeC = this.usb43Gen2TypeC;
+    this.motherboardDTO.supportedCpus = this.supportedCpus;
+    this.motherboardDTO.sata3Slots = this.sata3Slots;
+    this.motherboardDTO.m2Ports = this.m2Ports;
+    this.motherboardDTO.ramType = this.ramType;
+    this.motherboardDTO.ramSlotsNumber = this.ramSlots;
+    this.motherboardDTO.supportedFrequencies = this.supportedFrequencies;
+    this.motherboardDTO.warranty = this.warranty;
+    this.motherboardDTO.ramType = this.motherboardRamType;
+    this.motherboardDTO.ramSlotsNumber = this.motherboardRamSlots;
+
+    this.service.saveMotherboard(this.motherboardDTO).subscribe(() => {
+      console.log("Saved motherboard");
+    });
+
+    this.messageService.add({severity: 'info', summary: 'Placă de bază salvată cu succes!', detail: ''});
   }
 
   private saveProcessor() {
@@ -246,6 +347,8 @@ export class AddProductsPageComponent implements OnInit {
     this.processorDTO.l2Cache = this.l2_cache;
     this.processorDTO.threads = this.threads;
     this.processorDTO.maxTurboFrequency = this.maxTurboFrequency;
+    this.processorDTO.photos = this.uploadedFiles;
+    this.processorDTO.forLaptop = this.processorForLaptop;
 
     this.service.saveProcessor(this.processorDTO).subscribe(() => {
       console.log("Saved processor");
@@ -262,6 +365,7 @@ export class AddProductsPageComponent implements OnInit {
     this.storageDTO.capacity = this.storageCapacity;
     this.storageDTO.warranty = this.storageWarranty;
     this.storageDTO.speed = this.speed;
+    this.storageDTO.photos = this.uploadedFiles;
 
     this.service.saveStorage(this.storageDTO).subscribe(() => {
       console.log("Saved storage");
@@ -295,6 +399,7 @@ export class AddProductsPageComponent implements OnInit {
     this.ramDTO.forLaptop = this.ramForLaptop;
     this.ramDTO.frequency = this.ramFrequency
     this.ramDTO.total = this.ramTotal;
+    this.ramDTO.photos = this.uploadedFiles;
 
     this.service.saveRam(this.ramDTO).subscribe(() => {
       console.log("Saved ram");

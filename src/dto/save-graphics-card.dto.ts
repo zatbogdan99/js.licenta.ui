@@ -5,6 +5,7 @@ export class SaveGraphicsCardDto {
   capacity: number;
   technology: string;
   type: string;
+  photos: string[];
 
   constructor() {
   }

@@ -16,13 +16,13 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5 || product === 6">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5 || product === 6 || product === 7">
       <h4 style="margin-bottom: 0">Nume</h4>
       <input type="text" pInputText [(ngModel)]="name">
       <span style="padding-bottom: 20px"></span>
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 6">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 6 || product === 7">
       <h4 style="margin-bottom: 0">Garanție</h4>
       <input type="text" pInputText [(ngModel)]="warranty">
       <!--    <span class="p-ml-2"></span>-->
@@ -115,16 +115,11 @@
       <input type="text" pInputText [(ngModel)]="speed">
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
-      <h4 style="margin-bottom: 0">Pret</h4>
-      <input type="text" pInputText [(ngModel)]="price">
-      <!--    <span class="p-ml-2"></span>-->
-    </div>
 
     <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
       <h4 style="margin-bottom: 0">Placa Video</h4>
       <p-dropdown [options]="graphicsCards" [(ngModel)]="graphicsCard" (onChange)="onChange()" optionLabel="product"
-                  optionValue="value" placeholder="Selectează placă video"></p-dropdown>
+      optionValue="value" placeholder="Selectează placă video"></p-dropdown>
     </div>
 
 
@@ -248,10 +243,175 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 3">
+      <h4 style="margin-bottom: 0">Pentru laptop?</h4>
+      <input type="text" pInputText [(ngModel)]="processorForLaptop">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Format</h4>
+      <input type="text" pInputText [(ngModel)]="motherboardFormat">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Socket CPU suportat</h4>
+      <input type="text" pInputText [(ngModel)]="cpuSocket">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Producator</h4>
+      <input type="text" pInputText [(ngModel)]="chipsetProducer">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Model</h4>
+      <input type="text" pInputText [(ngModel)]="chipsetModel">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Procesoare suportate</h4>
+      <input type="text" pInputText [(ngModel)]="supportedCpus">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Interfață grafică</h4>
+      <input type="text" pInputText [(ngModel)]="graphicalInterface">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Placă audio integrată</h4>
+      <input type="text" pInputText [(ngModel)]="audioIntegrated">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Chipset audio</h4>
+      <input type="text" pInputText [(ngModel)]="chipsetAudio">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Placă de rețea integrată</h4>
+      <input type="text" pInputText [(ngModel)]="integratedNetworkCard">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Chipset placă de rețea</h4>
+      <input type="text" pInputText [(ngModel)]="networkChipset">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nrr. de sloturi SATA III</h4>
+      <input type="text" pInputText [(ngModel)]="sata3Slots">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de porturi M.2</h4>
+      <input type="text" pInputText [(ngModel)]="m2Ports">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Tip de ram suportat</h4>
+      <input type="text" pInputText [(ngModel)]="motherboardRamType">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Maxim de memorie RAM suportată</h4>
+      <input type="text" pInputText [(ngModel)]="maxRam">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de sloturi RAM</h4>
+      <input type="text" pInputText [(ngModel)]="motherboardRamSlots">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Frecvențe suportate</h4>
+      <input type="text" pInputText [(ngModel)]="supportedFrequencies">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Sloturi PCI EXPRESS 4.0x16</h4>
+      <input type="text" pInputText [(ngModel)]="pciExpress40x16">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Sloturi PCI EXPRESS 3.0x16</h4>
+      <input type="text" pInputText [(ngModel)]="pciExpress30x16">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Sloturi PCI EXPRESS X1</h4>
+      <input type="text" pInputText [(ngModel)]="pciExpressX1">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Porturi HDMI</h4>
+      <input type="text" pInputText [(ngModel)]="hdmi">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Porturi display</h4>
+      <input type="text" pInputText [(ngModel)]="displayPort">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe USB 2.0</h4>
+      <input type="text" pInputText [(ngModel)]="usb20">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe USB 3.2 gen1 tip A</h4>
+      <input type="text" pInputText [(ngModel)]="usb32Gen1TypeA">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe USB 3.2 gen 2 tip A</h4>
+      <input type="text" pInputText [(ngModel)]="usb32Gen2TypeA">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe USB gen 2 type C</h4>
+      <input type="text" pInputText [(ngModel)]="usb43Gen2TypeC">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe LAN RJ-45</h4>
+      <input type="text" pInputText [(ngModel)]="rj45Lan">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe audio JACK</h4>
+      <input type="text" pInputText [(ngModel)]="audioJack">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. mufe DVI</h4>
+      <input type="text" pInputText [(ngModel)]="dvi">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe VGA</h4>
+      <input type="text" pInputText [(ngModel)]="vga">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe PS/2 MOUSE</h4>
+      <input type="text" pInputText [(ngModel)]="ps2Mouse">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 7">
+      <h4 style="margin-bottom: 0">Nr. de mufe PS/2 Tastatură</h4>
+      <input type="text" pInputText [(ngModel)]="ps2Keyboard">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product == 7">
+      <h4 style="margin-bottom: 0">Pret</h4>
+      <input type="text" pInputText [(ngModel)]="price">
+    </div>
+
   </div>
 
 
-  <div class="p-field p-col-6 p-md-2" *ngIf="product === 1">
+  <div class="p-field p-col-6 p-md-2" *ngIf="product === 1 || product == 5 || product == 6 || product == 2 || product == 3 || product == 7">
     <h4 style="margin-bottom: 0">Poza</h4>
     <p-fileUpload accept="image/*" (onSelect)="onSelect($event)" [multiple]="true"></p-fileUpload>
     <span class="p-ml-2"></span>

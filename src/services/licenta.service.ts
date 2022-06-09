@@ -11,6 +11,13 @@ import {FilterDto} from "../dto/filter.dto";
 import {SaveStorageDto} from "../dto/save-storage.dto";
 import {SaveRamDto} from "../dto/save-ram.dto";
 import {PhotosDto} from "../dto/photos.dto";
+import {SaveMotherboardDto} from "../dto/save-motherboard.dto";
+import {GraphicsCardDto} from "../dto/graphics-card.dto";
+import {ProcessorDto} from "../dto/processor.dto";
+import {StorageDto} from "../dto/storage.dto";
+import {RamDto} from "../dto/ram.dto";
+import {MotherboardDto} from "../dto/motherboard.dto";
+import {PhotosModelDto} from "../dto/photos.model.dto";
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +45,28 @@ export class LicentaService {
     return this.http.post<LaptopDto>(this.getUrl("get-laptop"), id);
   }
 
-  public getPhotos(id: number): Observable<PhotosDto> {
-    return this.http.post<PhotosDto>(this.getUrl("get-photos"), id);
+  public getProcessor(id: number): Observable<ProcessorDto> {
+    return this.http.post<ProcessorDto>(this.getUrl("get-processor"), id);
+  }
+
+  public getRamById(id: number): Observable<RamDto> {
+    return this.http.post<RamDto>(this.getUrl("get-ram-by-id"), id);
+  }
+
+  public getStorageById(id: number): Observable<StorageDto> {
+    return this.http.post<StorageDto>(this.getUrl("get-storage-by-id"), id);
+  }
+
+  getMotherboardById(id: number): Observable<MotherboardDto> {
+    return this.http.post<MotherboardDto>(this.getUrl("get-motherboard-by-id"), id);
+  }
+
+  public getGraphicsCard(id: number): Observable<GraphicsCardDto> {
+    return this.http.post<GraphicsCardDto>(this.getUrl("get-graphics-card"), id);
+  }
+
+  public getPhotos(photosModelDto: PhotosModelDto): Observable<PhotosDto> {
+    return this.http.post<PhotosDto>(this.getUrl("get-photos"), photosModelDto);
   }
 
   public saveLaptop(laptop: SaveLaptopModel) {
@@ -48,6 +75,10 @@ export class LicentaService {
 
   public saveGraphicsCard(graphicsCard: SaveGraphicsCardDto) {
     return this.http.post<SaveGraphicsCardDto>(this.getUrl("save-graphics-card"), graphicsCard);
+  }
+
+  public saveMotherboard(graphicsCard: SaveMotherboardDto) {
+    return this.http.post<SaveMotherboardDto>(this.getUrl("save-motherboard"), graphicsCard);
   }
 
   private getUrl(path: string): string {
@@ -84,6 +115,10 @@ export class LicentaService {
 
   public getRam(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-ram"));
+  }
+
+  public getMotherboard(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-motherboard"));
   }
 
   public saveStorage(storageDTO: SaveStorageDto) {

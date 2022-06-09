@@ -17,7 +17,7 @@
     <p-accordionTab header="Denumire" [selected]="true">
       {{product.name}}
     </p-accordionTab>
-    <p-accordionTab header="Display" [selected]="true">
+    <p-accordionTab *ngIf="laptopDto != null && laptopDto != undefined" header="Display" [selected]="true">
       <div class="withPadding"> Dimensiune:  {{laptopDto.display.screenSize}}' </div>
       <div class="withPadding"> Luminozitate: {{laptopDto.display.brightness}} </div>
       <div class="withPadding"> Freesync: {{laptopDto.display.freesync}} </div>
@@ -25,7 +25,7 @@
       <div class="withPadding"> Rata de refresh: {{laptopDto.display.refreshRate}} Hz </div>
       <div class="withPadding"> Tehnologie de fabricatie: {{laptopDto.display.technology}} nm </div>
     </p-accordionTab>
-    <p-accordionTab header="Procesor" [selected]="true">
+    <p-accordionTab *ngIf="laptopDto != null && laptopDto != undefined" header="Procesor" [selected]="true">
       <div class="withPadding"> Producator: {{laptopDto.processor.producer}} </div>
       <div class="withPadding"> Nume: {{laptopDto.processor.name}} </div>
       <div class="withPadding"> Familie: {{laptopDto.processor.family}} </div>
@@ -37,19 +37,26 @@
       <div class="withPadding"> Tehnologie de fabricatie: {{laptopDto.processor.technology}} nm </div>
       <div class="withPadding"> Placa grafica integrata: {{laptopDto.processor.integratedGraphics}} </div>
     </p-accordionTab>
-    <p-accordionTab header="Memorie">
+    <p-accordionTab *ngIf="laptopDto != null && laptopDto != undefined" header="Memorie">
       <div class="withPadding"> Tip: {{laptopDto.ramType}} </div>
       <div class="withPadding"> Frecventa: {{laptopDto.ramFrequency}} MHz </div>
       <div class="withPadding"> Nr sloturi memorie RAM: {{laptopDto.ramSlots}} </div>
       <div class="withPadding"> Total memorie RAM: {{laptopDto.ramTotal}} Gb </div>
     </p-accordionTab>
-    <p-accordionTab header="Stocare">
+    <p-accordionTab header="Stocare" *ngIf="laptopDto != null && laptopDto != undefined">
       <div class="withPadding"> Tip stocare: {{laptopDto.storage}} </div>
       <div class="withPadding"> Capacitate stocare: {{laptopDto.storageCapacity}} Gb </div>
       <div class="withPadding"> Interfata de stocare: {{laptopDto.storageInterface}} </div>
       <div class="withPadding"> Form factor: {{laptopDto.storageFormFactor}} </div>
     </p-accordionTab>
-    <p-accordionTab *ngIf="laptopDto.graphicsCard.type === 'Dedicata'" header="Placa video">
+    <p-accordionTab *ngIf="laptopDto != null && laptopDto != undefined && laptopDto.graphicsCard.type === 'Dedicata'" header="Placa video">
+      <div class="withPadding"> Chipset: {{laptopDto.graphicsCard.chipset}} </div>
+      <div class="withPadding"> Model: {{laptopDto.graphicsCard.model}} </div>
+      <div class="withPadding"> Capacitate: {{laptopDto.graphicsCard.capacity}} </div>
+      <div class="withPadding"> Tehnologie de fabricatie: {{laptopDto.graphicsCard.technology}} </div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="" header="Placa video">
       <div class="withPadding"> Chipset: {{laptopDto.graphicsCard.chipset}} </div>
       <div class="withPadding"> Model: {{laptopDto.graphicsCard.model}} </div>
       <div class="withPadding"> Capacitate: {{laptopDto.graphicsCard.capacity}} </div>

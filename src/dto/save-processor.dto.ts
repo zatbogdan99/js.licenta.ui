@@ -15,6 +15,8 @@ export class SaveProcessorDTO {
   l3Cache: number;
   technology: number;
   integratedGraphics: string;
+  forLaptop: number;
+  photos: string[];
 
   constructor() {
   }

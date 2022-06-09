@@ -1,4 +1,4 @@
-export class SaveStorageDto {
+export class StorageDto {
   type: string;
   name: string;
   warranty: number;
@@ -6,5 +6,5 @@ export class SaveStorageDto {
   storage_interface: string;
   form_factor: number;
   speed: number;
-  photos: string[];
+  photo: string;
 }

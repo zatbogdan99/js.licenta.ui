@@ -1,4 +1,4 @@
-export class SaveRamDto {
+export class RamDto {
   id: number;
   name: string;
   warranty: number;
@@ -7,7 +7,7 @@ export class SaveRamDto {
   frequency: number;
   format: string;
   forLaptop: number;
-  photos: string[];
+  photo: string;
 
   constructor() {
   }
