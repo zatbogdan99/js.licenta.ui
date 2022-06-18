@@ -8,6 +8,7 @@ export class RamDto {
   format: string;
   forLaptop: number;
   photo: string;
+  price: number;
 
   constructor() {
   }

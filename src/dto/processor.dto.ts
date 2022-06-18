@@ -12,4 +12,7 @@ export interface ProcessorDto {
   l3Cache: number;
   technology: number;
   integratedGraphics: string;
+  forLaptop: number;
+  photo: string;
+  price: number;
 }

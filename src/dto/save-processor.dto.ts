@@ -16,6 +16,8 @@ export class SaveProcessorDTO {
   technology: number;
   integratedGraphics: string;
   forLaptop: number;
+  stock: number;
+  price: number;
   photos: string[];
 
   constructor() {

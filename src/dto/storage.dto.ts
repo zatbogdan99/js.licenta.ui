@@ -1,4 +1,5 @@
 export class StorageDto {
+  id: number;
   type: string;
   name: string;
   warranty: number;
@@ -7,4 +8,5 @@ export class StorageDto {
   form_factor: number;
   speed: number;
   photo: string;
+  price: number;
 }

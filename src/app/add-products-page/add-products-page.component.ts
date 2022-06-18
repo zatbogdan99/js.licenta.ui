@@ -11,6 +11,7 @@ import {ProductDto} from "../../dto/product.dto";
 import {SaveStorageDto} from "../../dto/save-storage.dto";
 import {SaveRamDto} from "../../dto/save-ram.dto";
 import {SaveMotherboardDto} from "../../dto/save-motherboard.dto";
+import {DesktopDto} from "../../dto/desktop.dto";
 
 class Product {
   product: string;
@@ -48,13 +49,16 @@ export class AddProductsPageComponent implements OnInit {
     {product: "Display", value: 4},
     {product: "Storage", value: 5},
     {product: "Ram", value: 6},
-    {product: "Motherboard", value: 7}
+    {product: "Motherboard", value: 7},
+    {product: "Desktop", value: 8}
   ]
   processors: Product[] = [];
 
   rams: Product[] = [];
 
   motherboards: Product[] = [];
+
+  desktops: Product[] = [];
 
   storages: Product[] = [];
 
@@ -68,6 +72,7 @@ export class AddProductsPageComponent implements OnInit {
   processorDTO: SaveProcessorDTO;
   displayDTO: SaveDisplayDto;
   ramDTO: SaveRamDto;
+  desktopDTO: DesktopDto;
   storageDTO: SaveStorageDto;
   name: string;
   warranty: number;
@@ -143,6 +148,8 @@ export class AddProductsPageComponent implements OnInit {
   vga: number;
   ps2Mouse: number;
   ps2Keyboard: number;
+  stock: number;
+  forLaptop: number;
 
 
 
@@ -152,6 +159,10 @@ export class AddProductsPageComponent implements OnInit {
   ngOnInit(): void {
     console.log('intram in onInit', this.products);
     this.enableLoading();
+    this.loadProducts();
+  }
+
+  private loadProducts() {
     this.service.getDisplays().subscribe(data => {
       let i = 1;
       data.forEach(p => {
@@ -206,7 +217,14 @@ export class AddProductsPageComponent implements OnInit {
       this.disableLoading();
     });
 
-
+    this.enableLoading();
+    this.service.getDesktops().subscribe(data => {
+      let i = 1;
+      data.forEach(p => {
+        this.desktops.push(new Product(p.description, i++, p.id));
+      })
+      this.disableLoading();
+    });
   }
 
   saveLaptop() {
@@ -221,6 +239,7 @@ export class AddProductsPageComponent implements OnInit {
     console.log(this.graphicsCards);
     this.laptop.graphicsCard = this.graphicsCards[this.graphicsCard - 1].productId;
     this.laptop.price = this.price;
+    this.laptop.stock = this.stock;
     this.laptop.photos = this.uploadedFiles;
 
     this.service.saveLaptop(this.laptop).subscribe(() => {
@@ -265,6 +284,10 @@ export class AddProductsPageComponent implements OnInit {
         this.saveMotherboard();
         break;
       }
+      case 8: {
+        this.saveDesktop();
+        break;
+      }
     }
   }
 
@@ -277,6 +300,8 @@ export class AddProductsPageComponent implements OnInit {
     this.graphicsCardDTO.chipset = this.chipset;
     this.graphicsCardDTO.technology = this.technology;
     this.graphicsCardDTO.photos = this.uploadedFiles;
+    this.graphicsCardDTO.stock = this.stock;
+    this.graphicsCardDTO.forLaptop = this.forLaptop;
 
     this.service.saveGraphicsCard(this.graphicsCardDTO).subscribe(() => {
       console.log("Saved graphics card");
@@ -325,6 +350,7 @@ export class AddProductsPageComponent implements OnInit {
     this.motherboardDTO.warranty = this.warranty;
     this.motherboardDTO.ramType = this.motherboardRamType;
     this.motherboardDTO.ramSlotsNumber = this.motherboardRamSlots;
+    this.motherboardDTO.stock = this.stock;
 
     this.service.saveMotherboard(this.motherboardDTO).subscribe(() => {
       console.log("Saved motherboard");
@@ -349,6 +375,9 @@ export class AddProductsPageComponent implements OnInit {
     this.processorDTO.maxTurboFrequency = this.maxTurboFrequency;
     this.processorDTO.photos = this.uploadedFiles;
     this.processorDTO.forLaptop = this.processorForLaptop;
+    this.processorDTO.stock = this.stock;
+    this.processorDTO.forLaptop = this.forLaptop;
+    this.processorDTO.price = this.price;
 
     this.service.saveProcessor(this.processorDTO).subscribe(() => {
       console.log("Saved processor");
@@ -366,6 +395,7 @@ export class AddProductsPageComponent implements OnInit {
     this.storageDTO.warranty = this.storageWarranty;
     this.storageDTO.speed = this.speed;
     this.storageDTO.photos = this.uploadedFiles;
+    this.storageDTO.stock = this.stock;
 
     this.service.saveStorage(this.storageDTO).subscribe(() => {
       console.log("Saved storage");
@@ -399,6 +429,7 @@ export class AddProductsPageComponent implements OnInit {
     this.ramDTO.forLaptop = this.ramForLaptop;
     this.ramDTO.frequency = this.ramFrequency
     this.ramDTO.total = this.ramTotal;
+    this.ramDTO.stock = this.stock;
     this.ramDTO.photos = this.uploadedFiles;
 
     this.service.saveRam(this.ramDTO).subscribe(() => {
@@ -406,6 +437,25 @@ export class AddProductsPageComponent implements OnInit {
     })
 
     this.messageService.add({severity: 'info', summary: 'RAM salvat cu succes!', detail: ''});
+  }
+
+  private saveDesktop() {
+    this.desktopDTO = new DesktopDto();
+    this.desktopDTO.name = this.name;
+    this.desktopDTO.warranty = this.warranty;
+    this.desktopDTO.processor = this.processors[this.processor - 1].productId;
+    this.desktopDTO.ram = this.rams[this.ram - 1].productId;
+    this.desktopDTO.storage = this.storages[this.selectedStorage - 1].productId;
+    this.desktopDTO.graphicsCard = this.graphicsCards[this.graphicsCard - 1].productId;
+    this.desktopDTO.photos = this.uploadedFiles;
+    this.desktopDTO.type = this.type;
+    this.desktopDTO.stock = this.stock;
+
+    this.service.saveDesktop(this.desktopDTO).subscribe(() => {
+      console.log("Saved desktop");
+    })
+
+    this.messageService.add({severity: 'info', summary: 'Desktop salvat cu succes!', detail: ''});
   }
 
   onSelect(event: any) {

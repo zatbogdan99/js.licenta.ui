@@ -18,6 +18,10 @@ import {StorageDto} from "../dto/storage.dto";
 import {RamDto} from "../dto/ram.dto";
 import {MotherboardDto} from "../dto/motherboard.dto";
 import {PhotosModelDto} from "../dto/photos.model.dto";
+import {DesktopDto} from "../dto/desktop.dto";
+import {FullDesktopDto} from "../dto/full-desktop.dto";
+import {UpdateProductDto} from "../dto/update-product.dto";
+import {ConfiguratorDto} from "../dto/configurator.dto";
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +38,7 @@ export class LicentaService {
   }
 
   public getAllProducts(): Observable<Array<ProductDto>> {
-    return this.http.get<any>(this.getUrl(""));
+    return this.http.get<any>(this.getUrl("load-products"));
   }
 
   public updateProducts(filters: FilterDto): Observable<Array<ProductDto>> {
@@ -59,6 +63,10 @@ export class LicentaService {
 
   getMotherboardById(id: number): Observable<MotherboardDto> {
     return this.http.post<MotherboardDto>(this.getUrl("get-motherboard-by-id"), id);
+  }
+
+  getDesktop(id: number): Observable<FullDesktopDto> {
+    return  this.http.post<FullDesktopDto>(this.getUrl("get-desktop"), id);
   }
 
   public getGraphicsCard(id: number): Observable<GraphicsCardDto> {
@@ -97,6 +105,26 @@ export class LicentaService {
     return this.http.post<SaveRamDto>(this.getUrl("save-ram"), ram);
   }
 
+  public getCompatibleProcessors(configuratorDTO: ConfiguratorDto): Observable<Array<ProductDto>> {
+    return this.http.post<Array<ProductDto>>(this.getUrl("get-compatible-processors"), configuratorDTO);
+  }
+
+  public getCompatibleGraphicsCards(configurationDTO: ConfiguratorDto): Observable<Array<ProductDto>> {
+    return this.http.post<Array<ProductDto>>(this.getUrl("get-compatible-graphics-cards"), configurationDTO);
+  }
+
+  public getCompatibleRams(configurationDTO: ConfiguratorDto): Observable<Array<ProductDto>> {
+    return this.http.post<Array<ProductDto>>(this.getUrl("get-compatible-rams"), configurationDTO);
+  }
+
+  public getCompatibleStorage(configurationDTO: ConfiguratorDto): Observable<Array<ProductDto>> {
+    return this.http.post<Array<ProductDto>>(this.getUrl("get-compatible-storages"), configurationDTO);
+  }
+
+  public getCompatibleMotherboards(configurationDTO: ConfiguratorDto) {
+    return this.http.post<Array<ProductDto>>(this.getUrl("get-compatible-motherboards"), configurationDTO);
+  }
+
   public getDisplays(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-displays"));
   }
@@ -113,6 +141,10 @@ export class LicentaService {
     return this.http.get<any>(this.getUrl("get-storage"));
   }
 
+  public getDesktops(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-desktops"));
+  }
+
   public getRam(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-ram"));
   }
@@ -123,5 +155,13 @@ export class LicentaService {
 
   public saveStorage(storageDTO: SaveStorageDto) {
     return this.http.post<SaveStorageDto>(this.getUrl("save-storage"), storageDTO);
+  }
+
+  public saveDesktop(desktopDTO: DesktopDto) {
+    return this.http.post<DesktopDto>(this.getUrl("save-desktop"), desktopDTO);
+  }
+
+  public updateProductStock(updateProductDto: UpdateProductDto) {
+    return this.http.post<UpdateProductDto>(this.getUrl("update-product-stock"), updateProductDto);
   }
 }

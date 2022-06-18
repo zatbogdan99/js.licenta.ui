@@ -56,11 +56,88 @@
       <div class="withPadding"> Tehnologie de fabricatie: {{laptopDto.graphicsCard.technology}} </div>
     </p-accordionTab>
 
-    <p-accordionTab *ngIf="" header="Placa video">
-      <div class="withPadding"> Chipset: {{laptopDto.graphicsCard.chipset}} </div>
-      <div class="withPadding"> Model: {{laptopDto.graphicsCard.model}} </div>
-      <div class="withPadding"> Capacitate: {{laptopDto.graphicsCard.capacity}} </div>
-      <div class="withPadding"> Tehnologie de fabricatie: {{laptopDto.graphicsCard.technology}} </div>
+    <p-accordionTab *ngIf="graphicsCardDto != null && graphicsCardDto != undefined" header="Specificații" [selected]="true">
+      <div class="withPadding"> Chipset: {{graphicsCardDto.chipset}} </div>
+      <div class="withPadding"> Model: {{graphicsCardDto.model}} </div>
+      <div class="withPadding"> Capacitate: {{graphicsCardDto.capacity}} Gb </div>
+      <div class="withPadding"> Tehnologie de fabricatie: {{graphicsCardDto.technology}} nm </div>
+      <div class="withPadding"> Tip: {{graphicsCardDto.type}} </div>
     </p-accordionTab>
+
+    <p-accordionTab *ngIf="processorDto != null && processorDto != undefined" header="Specificații" [selected]="true">
+      <div class="withPadding"> Producător: {{processorDto.producer}} </div>
+      <div class="withPadding"> Familie: {{processorDto.family}} </div>
+      <div class="withPadding"> Model: {{processorDto.model}} </div>
+      <div class="withPadding"> Nr. nuclee: {{processorDto.cores}}</div>
+      <div class="withPadding"> Nr. threaduri: {{processorDto.threads}}</div>
+      <div class="withPadding"> Frecvența de bază: {{processorDto.baseFrequency}} Ghz </div>
+      <div class="withPadding"> Frecvența turbo boost: {{processorDto.maxTurboFrequency}} Ghz </div>
+      <div class="withPadding"> Memorie cache pt nivelul L2: {{processorDto.l2Cache}}</div>
+      <div class="withPadding"> Memorie cache pt nivelul L3: {{processorDto.l3Cache}}</div>
+      <div class="withPadding"> Tehnologie de fabricație: {{processorDto.technology}} nm </div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="ramDto != null && ramDto != undefined" header="Specificații" [selected]="true">
+      <div class="withPadding"> Garanție: {{ramDto.warranty}} </div>
+      <div class="withPadding"> Tip memorie: {{ramDto.type}} </div>
+      <div class="withPadding"> Total memorie: {{ramDto.total}} </div>
+      <div class="withPadding"> Fracvență memorie: {{ramDto.frequency}}</div>
+      <div class="withPadding"> Format: {{ramDto.format}}</div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="storageDto != null && storageDto != undefined" header="Specificații" [selected]="true">
+      <div class="withPadding"> Garanție: {{storageDto.warranty}} </div>
+      <div class="withPadding"> Capacitate: {{storageDto.capacity}} </div>
+      <div *ngIf="storageDto.type === 'SSD'" class="withPadding"> Interfață: {{storageDto.storage_interface}} </div>
+      <div *ngIf="storageDto.type === 'SSD'" class="withPadding"> Form factor: {{storageDto.form_factor}}</div>
+      <div *ngIf="storageDto.type === 'HDD'" class="withPadding"> Format: {{storageDto.speed}}</div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="desktopDto != null && desktopDto != undefined" header="Garanție" [selected]="true">
+      <div class="withPadding"> Garanție: {{desktopDto.warranty}} </div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="desktopDto != null && desktopDto != undefined" header="Tip Desktop" [selected]="true">
+      <div class="withPadding"> Capacitate: {{desktopDto.type}} </div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="desktopDto != null && desktopDto != undefined" header="Procesor" [selected]="true">
+      <div class="withPadding"> Producător: {{desktopDto.processor.producer}} </div>
+      <div class="withPadding"> Familie: {{desktopDto.processor.family}} </div>
+      <div class="withPadding"> Model: {{desktopDto.processor.model}} </div>
+      <div class="withPadding"> Nr. nuclee: {{desktopDto.processor.cores}}</div>
+      <div class="withPadding"> Nr. threaduri: {{desktopDto.processor.threads}}</div>
+      <div class="withPadding"> Frecvența de bază: {{desktopDto.processor.baseFrequency}} Ghz </div>
+      <div class="withPadding"> Frecvența turbo boost: {{desktopDto.processor.maxTurboFrequency}} Ghz </div>
+      <div class="withPadding"> Memorie cache pt nivelul L2: {{desktopDto.processor.l2Cache}}</div>
+      <div class="withPadding"> Memorie cache pt nivelul L3: {{desktopDto.processor.l3Cache}}</div>
+      <div class="withPadding"> Tehnologie de fabricație: {{desktopDto.processor.technology}} nm </div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="desktopDto != null && desktopDto != undefined" header="Placă video" [selected]="true">
+      <div class="withPadding"> Chipset: {{desktopDto.graphicsCard.chipset}} </div>
+      <div class="withPadding"> Model: {{desktopDto.graphicsCard.model}} </div>
+      <div class="withPadding"> Capacitate: {{desktopDto.graphicsCard.capacity}} Gb </div>
+      <div class="withPadding"> Tehnologie de fabricatie: {{desktopDto.graphicsCard.technology}} nm </div>
+      <div class="withPadding"> Tip: {{desktopDto.graphicsCard.type}} </div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="desktopDto != null && desktopDto != undefined" header="Memorie RAM" [selected]="true">
+      <div class="withPadding"> Garanție: {{desktopDto.ram.warranty}} </div>
+      <div class="withPadding"> Tip memorie: {{desktopDto.ram.type}} </div>
+      <div class="withPadding"> Total memorie: {{desktopDto.ram.total}} </div>
+      <div class="withPadding"> Fracvență memorie: {{desktopDto.ram.frequency}}</div>
+      <div class="withPadding"> Format: {{desktopDto.ram.format}}</div>
+    </p-accordionTab>
+
+    <p-accordionTab *ngIf="desktopDto != null && desktopDto != undefined" header="Memorie" [selected]="true">
+      <div class="withPadding"> Garanție: {{desktopDto.storage.warranty}} </div>
+      <div class="withPadding"> Capacitate: {{desktopDto.storage.capacity}} </div>
+      <div class="withPadding"> Tip: {{desktopDto.storage.type}} </div>
+      <div *ngIf="desktopDto.storage.type === 'SSD'" class="withPadding"> Interfață: {{desktopDto.storage.storage_interface}} </div>
+      <div *ngIf="desktopDto.storage.type === 'SSD'" class="withPadding"> Form factor: {{desktopDto.storage.form_factor}}</div>
+      <div *ngIf="desktopDto.storage.type === 'HDD'" class="withPadding"> Format: {{desktopDto.storage.speed}}</div>
+    </p-accordionTab>
+
   </p-accordion>
 </div>

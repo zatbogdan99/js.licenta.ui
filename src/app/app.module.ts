@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,13 +38,37 @@ import { DetailedViewComponent } from './detailed-view/detailed-view.component';
 import {AccordionModule} from "primeng/accordion";
 import {ChipModule} from "primeng/chip";
 import {GalleriaModule} from "primeng/galleria";
+import { UpdateStockComponent } from './update-stock/update-stock.component';
+import {TableModule} from "primeng/table";
+import { ConfiguratorComponent } from './configurator/configurator.component';
+import { SelectComponent } from './select/select.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8080/auth',
+        realm: 'PC workshop',
+        clientId: 'licenta-app'
+      },
+      initOptions: {
+        checkLoginIframe: true,
+        checkLoginIframeInterval: 25
+      },
+      loadUserProfileAtStartUp: true
+    });
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     AddProductsPageComponent,
-    DetailedViewComponent
+    DetailedViewComponent,
+    UpdateStockComponent,
+    ConfiguratorComponent,
+    SelectComponent
   ],
     imports: [
         BrowserModule,
@@ -78,9 +102,19 @@ import {GalleriaModule} from "primeng/galleria";
         SliderModule,
         AccordionModule,
         ChipModule,
-        GalleriaModule
+        GalleriaModule,
+        TableModule,
+        KeycloakAngularModule
     ],
-  providers: [MessageService],
+  providers: [
+    MessageService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

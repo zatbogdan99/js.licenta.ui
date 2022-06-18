@@ -35,6 +35,7 @@ export class SaveMotherboardDto {
    photos: string[];
    price: number;
    warranty: number;
+   stock: number;
 
   constructor() {
   }

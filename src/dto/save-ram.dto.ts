@@ -7,6 +7,7 @@ export class SaveRamDto {
   frequency: number;
   format: string;
   forLaptop: number;
+  stock: number;
   photos: string[];
 
   constructor() {

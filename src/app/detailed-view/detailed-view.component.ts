@@ -12,6 +12,8 @@ import {StorageDto} from "../../dto/storage.dto";
 import {RamDto} from "../../dto/ram.dto";
 import {MotherboardDto} from "../../dto/motherboard.dto";
 import {PhotosModelDto} from "../../dto/photos.model.dto";
+import {DesktopDto} from "../../dto/desktop.dto";
+import {FullDesktopDto} from "../../dto/full-desktop.dto";
 
 @Component({
   selector: 'app-detailed-view',
@@ -28,6 +30,7 @@ export class DetailedViewComponent implements OnInit {
   processorDto: ProcessorDto;
   ramDto: RamDto;
   storageDto: StorageDto;
+  desktopDto: FullDesktopDto;
   photos: PhotosDto;
   images: any[];
 
@@ -50,7 +53,7 @@ export class DetailedViewComponent implements OnInit {
         })
         break;
       }
-      case "Procesor": {
+      case "Processor": {
         this.service.getProcessor(this.product.id).subscribe(processor => {
           this.processorDto = processor;
           console.log("A fost procesor: ", this.processorDto);
@@ -75,6 +78,13 @@ export class DetailedViewComponent implements OnInit {
         this.service.getMotherboardById(this.product.id).subscribe(motherboard => {
           this.motherboardDto = motherboard;
           console.log("A fost motherboard: ", this.motherboardDto);
+        })
+        break;
+      }
+      case "Desktop": {
+        this.service.getDesktop(this.product.id).subscribe(desktop => {
+          this.desktopDto = desktop;
+          console.log("A fost desktop ", this.desktopDto);
         })
         break;
       }

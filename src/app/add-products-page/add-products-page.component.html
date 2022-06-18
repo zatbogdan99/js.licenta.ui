@@ -16,13 +16,13 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5 || product === 6 || product === 7">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 5 || product === 6 || product === 7 || product === 8">
       <h4 style="margin-bottom: 0">Nume</h4>
       <input type="text" pInputText [(ngModel)]="name">
       <span style="padding-bottom: 20px"></span>
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 6 || product === 7">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 6 || product === 7 || product === 8">
       <h4 style="margin-bottom: 0">Garanție</h4>
       <input type="text" pInputText [(ngModel)]="warranty">
       <!--    <span class="p-ml-2"></span>-->
@@ -35,14 +35,14 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 8">
       <h4 style="margin-bottom: 0">Processor</h4>
       <p-dropdown [options]="processors" (onChange)="onChange()" [(ngModel)]="processor" optionLabel="product"
                   optionValue="value" placeholder="Selectează procesor"></p-dropdown>
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 6 || product === 8">
       <h4 style="margin-bottom: 0">RAM total</h4>
       <input type="text" pInputText [(ngModel)]="ramTotal">
     </div>
@@ -67,7 +67,12 @@
       <input type="text" pInputText [(ngModel)]="ramForLaptop">
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 2 || product === 3">
+      <h4 style="margin-bottom: 0">Pentru laptop?</h4>
+      <input type="text" pInputText [(ngModel)]="forLaptop">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 8">
       <h4 style="margin-bottom: 0">Memorie RAM</h4>
       <p-dropdown [options]="rams" (onChange)="onChange()" [(ngModel)]="ram" optionLabel="product"
                   optionValue="value" placeholder="Selectează memoria RAM"></p-dropdown>
@@ -78,7 +83,7 @@
       <input type="text" pInputText [(ngModel)]="ramSlots">
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 8">
       <h4 style="margin-bottom: 0">Stocare</h4>
       <p-dropdown [options]="storages" (onChange)="onChange()" [(ngModel)]="selectedStorage" optionLabel="product"
                   optionValue="value" placeholder="Selectează stocare"></p-dropdown>
@@ -116,8 +121,8 @@
     </div>
 
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1">
-      <h4 style="margin-bottom: 0">Placa Video</h4>
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 8">
+      <h4 style="margin-bottom: 0">Placă Video</h4>
       <p-dropdown [options]="graphicsCards" [(ngModel)]="graphicsCard" (onChange)="onChange()" optionLabel="product"
       optionValue="value" placeholder="Selectează placă video"></p-dropdown>
     </div>
@@ -142,7 +147,7 @@
       <!--    <span class="p-ml-2"></span>-->
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 2">
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 2 || product === 8">
       <h4 style="margin-bottom: 0">Tip</h4>
       <input type="text" pInputText [(ngModel)]="type">
       <!--    <span class="p-ml-2"></span>-->
@@ -403,15 +408,21 @@
       <input type="text" pInputText [(ngModel)]="ps2Keyboard">
     </div>
 
-    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product == 7">
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 7 || product === 3">
       <h4 style="margin-bottom: 0">Pret</h4>
       <input type="text" pInputText [(ngModel)]="price">
+    </div>
+
+    <div class="p-field p-col-6 p-md-2 display-inline-block" *ngIf="product === 1 || product === 2 || product === 3 || product === 4 || product === 5 || product === 6 || product === 7 || product === 8">
+      <h4 style="margin-bottom: 0">Stoc</h4>
+      <input type="text" pInputText [(ngModel)]="stock">
     </div>
 
   </div>
 
 
-  <div class="p-field p-col-6 p-md-2" *ngIf="product === 1 || product == 5 || product == 6 || product == 2 || product == 3 || product == 7">
+  <div class="p-field p-col-6 p-md-2" *ngIf="product === 1 || product == 5 || product == 6 || product == 2 || product == 3 || product == 7 || product === 8">
     <h4 style="margin-bottom: 0">Poza</h4>
     <p-fileUpload accept="image/*" (onSelect)="onSelect($event)" [multiple]="true"></p-fileUpload>
     <span class="p-ml-2"></span>

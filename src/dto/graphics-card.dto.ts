@@ -5,4 +5,6 @@ export interface GraphicsCardDto {
   model: string;
   capacity: number;
   technology: string;
+  photo: string;
+  price: number;
 }

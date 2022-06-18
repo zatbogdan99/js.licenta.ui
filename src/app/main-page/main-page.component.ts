@@ -11,6 +11,8 @@ import {AddProductsPageComponent} from "../add-products-page/add-products-page.c
 import {DomSanitizer} from "@angular/platform-browser";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {FilterDto} from "../../dto/filter.dto";
+import {UpdateStockComponent} from "../update-stock/update-stock.component";
+import {KeycloakService} from "keycloak-angular";
 
 
 @Component({
@@ -31,7 +33,6 @@ export class MainPageComponent implements OnInit {
   options: any;
   // filter: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   // filterObs: Observable<boolean> = this.filter.asObservable();
-  filter: boolean = false;
   sortOption: string;
   rangeValues: number[] = [0, 5000];
   selectedProcessors: string[] = [];
@@ -39,14 +40,18 @@ export class MainPageComponent implements OnInit {
   selectedMemoryCapacity: string[] = [];
   selectedRAM: string[] = [];
   showDetailsView: boolean = false;
+  showConfigurator: boolean = false;
   selectedProduct: ProductDto;
   filterDTO: FilterDto;
+  user = '';
 
   constructor(private service: LicentaService, private http: HttpClient,
               private primengConfig: PrimeNGConfig, private router: Router,
-              public dialogService: DialogService, private sanitization: DomSanitizer) {
+              public dialogService: DialogService, private sanitization: DomSanitizer,
+              private keycloakService: KeycloakService) {
     this.getAllProducts();
     // this.ref.detectChanges();
+    this.user = this.keycloakService.getUsername();
     console.log('toate produsele: ', this.products);
   }
 
@@ -121,11 +126,11 @@ export class MainPageComponent implements OnInit {
     // this.router.navigateByUrl('/add-products');
   }
 
-  showFilters() {
+  goToConfigurator() {
+    this.showConfigurator = true;
     // console.log(this.filter);
     // this.filter.next(false);
     // this.filterObs.subscribe();
-    this.filter = !this.filter;
   }
 
   moveToDetailedView(product: ProductDto) {
@@ -139,6 +144,7 @@ export class MainPageComponent implements OnInit {
     console.log("Event", event);
     if (event != undefined) {
       this.showDetailsView = false;
+      this.showConfigurator = false;
     }
   }
 
@@ -163,5 +169,16 @@ export class MainPageComponent implements OnInit {
     this.sortOrder = -1;
     this.sortField = "price";
   }
+  }
+
+  updateStock() {
+    const ref = this.dialogService.open(UpdateStockComponent, {
+      header: 'Actualizare stoc',
+      width: '70%'
+    });
+  }
+
+  logout() {
+    this.keycloakService.logout();
   }
 }

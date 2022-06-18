@@ -12,6 +12,7 @@ export class SaveLaptopModel {
   storage: number;
   graphicsCard: number;
   price: number;
+  stock: number;
   photos: string[];
 
   constructor() {
