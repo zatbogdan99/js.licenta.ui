@@ -1,0 +1,46 @@
+<div *ngIf="!loading">
+  <p-table [value]="products" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nume</th>
+      <th>Poză</th>
+      <th>Preț</th>
+      <th>Categorie produs</th>
+      <th>Stoc</th>
+      <th>Modificare stoc</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>{{product.name}}</td>
+      <td>
+        <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="150" height="150"
+                 [preview]="true"></p-image>
+      </td>
+      <td>{{product.price | currency:'EUR'}}</td>
+      <td>{{product.productType}}</td>
+      <td>
+        {{product.stock}}
+      </td>
+      <td>
+        <div class="p-field p-col-6 p-md-2 display-inline-block">
+          <p-button *ngIf="! (modifyStock && selectedProduct === product.id)" class="p-button-primary big-padding" label="Modificare stoc"
+                    (click)="showInput(product.id, product.productType)"></p-button>
+          <input *ngIf="modifyStock && selectedProduct === product.id" type="text" pInputText [(ngModel)]="stock">
+          <p-button *ngIf="modifyStock && selectedProduct === product.id" class="p-button-primary big-padding" label="Modificare"
+                    (click)="modify()"></p-button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+      Total produse: {{products ? products.length : 0 }}.
+    </div>
+  </ng-template>
+</p-table>
+</div>
+
+<div *ngIf="loading" class="wrapper">
+  <mat-spinner class="inner"></mat-spinner>
+</div>

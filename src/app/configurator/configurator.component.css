@@ -1,0 +1,21 @@
+.center {
+  margin-left: auto;
+  text-align: center;
+  margin-right: 44rem;
+  float: right;
+  height: 50rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.withPadding {
+  padding-bottom: 10px;
+}
+
+.withBackground {
+  background-image: url("configurator.jpg");
+  width: 100%;
+  height: 60rem;
+}

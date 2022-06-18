@@ -1,0 +1,38 @@
+<div *ngIf="!loading">
+  <p-table [value]="products" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nume</th>
+        <th>Poză</th>
+        <th>Preț</th>
+        <th>Categorie produs</th>
+        <th>Selectare componentă</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.name}}</td>
+        <td>
+          <p-image *ngIf="product.photo != null && product.photo != undefined" [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="100" height="100"></p-image>
+          <p-image *ngIf="product.photo == null || product.photo == undefined" [src]="'assets/placeholder.jpg'" alt="Image" width="150" height="130"></p-image>
+        </td>
+        <td>{{product.price}}</td>
+        <td>{{product.productType}}</td>
+        <td>
+          <div class="p-field p-col-6 p-md-2 display-inline-block">
+            <p-button class="p-button-primary big-padding" label="Selectează" (onClick)="selectComponent(product.id, product.productType)"></p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total produse: {{products ? products.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<div *ngIf="loading" class="wrapper">
+  <mat-spinner class="inner"></mat-spinner>
+</div>

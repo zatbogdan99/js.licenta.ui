@@ -1,0 +1,63 @@
+<div *ngIf="firstStep" class="withBackground">
+  <p-button class="center" label="Începe configurarea" (onClick)="startConfiguration()"></p-button>
+</div>
+
+<div *ngIf="!loading && !firstStep">
+  <img src="assets/logo2.png" alt="Logo"
+       style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
+  <div style="padding: 30px;">
+    <h4 style="font-size: 14pt">PC workshop</h4>
+  </div>
+
+    <p-button label="Înapoi la listă" (onClick)="backToList()"></p-button>
+    <p-table [value]="products" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nume</th>
+          <th>Descriere</th>
+          <th>Poză</th>
+          <th>Preț</th>
+          <th>Categorie produs</th>
+          <th>Selectare componentă</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{product.name}}</td>
+          <td style="max-width: 8rem">{{product.description}}</td>
+          <td>
+            <p-image *ngIf="product.photo != null && product.photo != undefined" [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="150" height="150"></p-image>
+            <p-image *ngIf="product.photo == null || product.photo == undefined" [src]="'assets/placeholder.jpg'" alt="Image" width="150" height="130"></p-image>
+          </td>
+          <td>{{(product.price != null && product.price != undefined) ? product.price : empty}}  EUR</td>
+          <td>{{product.productType}}</td>
+          <td>
+            <div class="p-field p-col-6 p-md-2 display-inline-block">
+              <p-button class="p-button-primary big-padding" label="Selectare componentă" (onClick)="gotoSelectComponent(product)"></p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+        </div>
+      </ng-template>
+    </p-table>
+
+  <img src="assets/logo1.png" alt="Logo"
+       style="width: 10%; height: auto; position: relative; bottom: 0; display: block; float: right">
+  </div>
+
+  <div *ngIf="loading" class="wrapper">
+    <mat-spinner class="inner"></mat-spinner>
+  </div>
+
+  <!--  <p-button class="center" label="Inapoi la lista" (onClick)="backToList()"></p-button>-->
+<!--  <p-dropdown [options]="processors" [(ngModel)]="selectedProcessor" optionLabel="product"-->
+<!--              optionValue="value" placeholder="Selectează procesor"></p-dropdown>-->
+<!--  <p-dropdown [options]="rams" [(ngModel)]="selectedRam" optionLabel="product"-->
+<!--              optionValue="value" placeholder="Selectează memoria RAM"></p-dropdown>-->
+<!--  <p-dropdown [options]="storages" [(ngModel)]="selectedStorage" optionLabel="product"-->
+<!--              optionValue="value" placeholder="Selectează stocare"></p-dropdown>-->
+<!--  <p-dropdown [options]="graphicsCards" [(ngModel)]="selectedGraphicsCard" optionLabel="product"-->
+<!--              optionValue="value" placeholder="Selectează placă video"></p-dropdown>-->
