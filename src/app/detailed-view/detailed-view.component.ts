@@ -14,6 +14,8 @@ import {MotherboardDto} from "../../dto/motherboard.dto";
 import {PhotosModelDto} from "../../dto/photos.model.dto";
 import {DesktopDto} from "../../dto/desktop.dto";
 import {FullDesktopDto} from "../../dto/full-desktop.dto";
+import {CartDto} from "../../dto/cart.dto";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-detailed-view',
@@ -23,7 +25,8 @@ import {FullDesktopDto} from "../../dto/full-desktop.dto";
 export class DetailedViewComponent implements OnInit {
 
   @Input() product: ProductDto;
-  @Output() eventEmitter = new EventEmitter<boolean>();
+  @Output() eventEmitter = new EventEmitter<CartDto>();
+
   laptopDto: LaptopDto;
   graphicsCardDto: GraphicsCardDto;
   motherboardDto: MotherboardDto;
@@ -33,8 +36,9 @@ export class DetailedViewComponent implements OnInit {
   desktopDto: FullDesktopDto;
   photos: PhotosDto;
   images: any[];
+  cartProduct: CartDto;
 
-  constructor(private service: LicentaService) {}
+  constructor(private service: LicentaService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     console.log(this.product);
@@ -99,8 +103,41 @@ export class DetailedViewComponent implements OnInit {
   }
 
   backToList() {
-    this.eventEmitter.emit(true);
+    console.log("Inapoi la lista");
+    this.eventEmitter.emit(this.cartProduct);
   }
 
 
+  public booleanToString(boolean: number): string {
+    if (boolean == 1) {
+      return "Da";
+    } else {
+      return "Nu";
+    }
+  }
+
+  public getRamSlotsNumber(additionalRamType: string): number {
+    if (additionalRamType != null) {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+
+  public addToCart() {
+    if (this.cartProduct == null) {
+      this.cartProduct = new CartDto();
+      this.cartProduct.id = this.product.id;
+      this.cartProduct.productType = this.product.productType;
+      this.cartProduct.stock = this.product.stock;
+      this.cartProduct.productNumber = 1;
+    } else {
+      this.cartProduct.productNumber = this.cartProduct.productNumber + 1;
+    }
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Produs adăugat în coș',
+      detail: 'Produsul a fost adăugat în coș, vă mulțumim !'
+    });
+  }
 }

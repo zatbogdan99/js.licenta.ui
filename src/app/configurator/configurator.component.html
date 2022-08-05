@@ -1,5 +1,8 @@
-<div *ngIf="firstStep" class="withBackground">
-  <p-button class="center" label="Începe configurarea" (onClick)="startConfiguration()"></p-button>
+<div *ngIf="firstStep && secondStep" class="withBackground">
+  <div class="center">
+    <p-button style="padding-right: 10rem" label="Configurator desktop" (onClick)="startConfiguration()"></p-button>
+    <p-button label="Upgrade laptop" (onClick)="startLaptopConfiguration()"></p-button>
+  </div>
 </div>
 
 <div *ngIf="!loading && !firstStep">
@@ -8,8 +11,11 @@
   <div style="padding: 30px;">
     <h4 style="font-size: 14pt">PC workshop</h4>
   </div>
+  <p-toast></p-toast>
 
     <p-button label="Înapoi la listă" (onClick)="backToList()"></p-button>
+    <h3 style="padding-left: 10rem; display: inline">Total: {{total}} EUR</h3>
+    <p-button class="addToCartButton" label="Adăugare în coș" (onClick)="addToCart()"></p-button>
     <p-table [value]="products" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr>
@@ -47,6 +53,56 @@
   <img src="assets/logo1.png" alt="Logo"
        style="width: 10%; height: auto; position: relative; bottom: 0; display: block; float: right">
   </div>
+
+<div *ngIf="!loading && !secondStep">
+  <img src="assets/logo2.png" alt="Logo"
+       style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
+  <div style="padding: 30px;">
+    <h4 style="font-size: 14pt">PC workshop</h4>
+  </div>
+
+  <p-toast></p-toast>
+
+  <p-button class="backToList" label="Înapoi la listă" (onClick)="backToList()"></p-button>
+  <h3 style="padding-left: 10rem; display: inline">Total: {{laptopTotal}} EUR</h3>
+  <p-button class="addToCartButton" label="Adăugare în coș" (onClick)="addToCart()"></p-button>
+  <p-table [value]="laptopProducts" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nume</th>
+        <th>Descriere</th>
+        <th>Poză</th>
+        <th>Preț</th>
+        <th>Categorie produs</th>
+        <th>Selectare componentă</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.name}}</td>
+        <td style="max-width: 8rem">{{product.description}}</td>
+        <td>
+          <p-image *ngIf="product.photo != null && product.photo != undefined" [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="150" height="150"></p-image>
+          <p-image *ngIf="product.photo == null || product.photo == undefined" [src]="'assets/placeholder.jpg'" alt="Image" width="150" height="130"></p-image>
+        </td>
+        <td>{{(product.price != null && product.price != undefined) ? product.price : empty}}  EUR</td>
+        <td>{{product.productType}}</td>
+        <td>
+          <div class="p-field p-col-6 p-md-2 display-inline-block">
+            <p-button class="p-button-primary big-padding" label="Selectare componentă" (onClick)="gotoSelectComponent(product)"></p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+      </div>
+    </ng-template>
+  </p-table>
+
+  <img src="assets/logo1.png" alt="Logo"
+       style="width: 10%; height: auto; position: relative; bottom: 0; display: block; float: right">
+</div>
 
   <div *ngIf="loading" class="wrapper">
     <mat-spinner class="inner"></mat-spinner>

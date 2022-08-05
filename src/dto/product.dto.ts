@@ -6,4 +6,6 @@ export class ProductDto {
   price: number;
   photo: any;
   stock: number;
+  productNumber: number;
+  forLaptop: number;
 }

@@ -43,6 +43,8 @@ import {TableModule} from "primeng/table";
 import { ConfiguratorComponent } from './configurator/configurator.component';
 import { SelectComponent } from './select/select.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import { RemoveProductsPageComponent } from './remove-products-page/remove-products-page.component';
+import { CartProductsComponent } from './cart-products/cart-products.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -68,7 +70,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DetailedViewComponent,
     UpdateStockComponent,
     ConfiguratorComponent,
-    SelectComponent
+    SelectComponent,
+    RemoveProductsPageComponent,
+    CartProductsComponent
   ],
     imports: [
         BrowserModule,

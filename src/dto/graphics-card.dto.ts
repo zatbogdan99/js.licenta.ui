@@ -7,4 +7,5 @@ export interface GraphicsCardDto {
   technology: string;
   photo: string;
   price: number;
+  warranty: number;
 }

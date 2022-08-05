@@ -8,4 +8,5 @@ export class SaveStorageDto {
   speed: number;
   stock: number;
   photos: string[];
+  price: number;
 }

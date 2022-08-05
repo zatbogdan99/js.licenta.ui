@@ -22,6 +22,8 @@ import {DesktopDto} from "../dto/desktop.dto";
 import {FullDesktopDto} from "../dto/full-desktop.dto";
 import {UpdateProductDto} from "../dto/update-product.dto";
 import {ConfiguratorDto} from "../dto/configurator.dto";
+import {RemoveProductDto} from "../dto/remove-product.dto";
+import {CartDto} from "../dto/cart.dto";
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +41,10 @@ export class LicentaService {
 
   public getAllProducts(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("load-products"));
+  }
+
+  public getAllProductsInCart(cartProducts: Array<CartDto>): Observable<Array<ProductDto>> {
+      return this.http.post<Array<ProductDto>>(this.getUrl("get-cart-products"), cartProducts);
   }
 
   public updateProducts(filters: FilterDto): Observable<Array<ProductDto>> {
@@ -145,6 +151,10 @@ export class LicentaService {
     return this.http.get<any>(this.getUrl("get-desktops"));
   }
 
+  public getLaptops(): Observable<Array<ProductDto>> {
+    return this.http.get<any>(this.getUrl("get-laptops"));
+  }
+
   public getRam(): Observable<Array<ProductDto>> {
     return this.http.get<any>(this.getUrl("get-ram"));
   }
@@ -163,5 +173,9 @@ export class LicentaService {
 
   public updateProductStock(updateProductDto: UpdateProductDto) {
     return this.http.post<UpdateProductDto>(this.getUrl("update-product-stock"), updateProductDto);
+  }
+
+  public removeProduct(model: RemoveProductDto) {
+    return this.http.post<RemoveProductDto>(this.getUrl("remove-product"), model);
   }
 }

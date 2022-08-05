@@ -5,4 +5,11 @@ export class FilterDto {
   memory: string[];
   memoryCapacity: string[];
   ram: string[];
+  productType: string;
+  selectedRAMFrequency: string[];
+  selectedRAMCAS: string[];
+  ramCapacity: string[];
+  selectedVRAM: string[];
+  selectedSocket: string[];
+  selectedGraphicalInterface: string[];
 }

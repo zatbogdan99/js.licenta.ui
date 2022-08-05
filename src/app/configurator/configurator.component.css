@@ -1,13 +1,21 @@
 .center {
   margin-left: auto;
-  text-align: center;
-  margin-right: 44rem;
+  /*text-align: center;*/
+  margin-right: 23rem;
   float: right;
   height: 50rem;
   width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.backToList {
+  padding: 10px;
+}
+
+.addToCartButton {
+  padding-left: 5rem;
 }
 
 .withPadding {

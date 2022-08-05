@@ -142,6 +142,12 @@
   float: right;
 }
 
+.h5 {
+  float: right;
+  padding-right: 10rem;
+  padding-top: 0.2rem;
+}
+
 .p-dropdown {
   padding-right: 3rem;
   padding-bottom: 2rem;
@@ -157,6 +163,11 @@
 
 :host ::ng-deep .p-chip.custom-chip {
   background: #53c953;
+  color: #ffffff;
+}
+
+:host ::ng-deep .p-chip.custom-chip2 {
+  background: #e5891e;
   color: #ffffff;
 }
 

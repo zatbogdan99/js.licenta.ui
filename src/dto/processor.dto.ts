@@ -15,4 +15,5 @@ export interface ProcessorDto {
   forLaptop: number;
   photo: string;
   price: number;
+  warranty: number;
 }

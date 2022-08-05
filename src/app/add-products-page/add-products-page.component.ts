@@ -44,7 +44,7 @@ export class AddProductsPageComponent implements OnInit {
 
   products: GeneralProduct[] = [
     {product: "Laptop", value: 1},
-    {product: "Placa video", value: 2},
+    {product: "Placă video", value: 2},
     {product: "Procesor", value: 3},
     {product: "Display", value: 4},
     {product: "Storage", value: 5},
@@ -63,7 +63,13 @@ export class AddProductsPageComponent implements OnInit {
   storages: Product[] = [];
 
   graphicsCards: Product[] = [];
+  desktopGraphicsCards: Product[] = [];
   displays: Product[] = [];
+  decisions: string[] = [
+    "Da",
+    "Nu"
+  ];
+  decision: string;
   loading: boolean = false;
   product: number = 1
   laptop: SaveLaptopModel;
@@ -183,9 +189,13 @@ export class AddProductsPageComponent implements OnInit {
 
     this.enableLoading();
     this.service.getGraphicCards().subscribe(data => {
+      console.log('Placile video: ', data);
       let i = 1;
       data.forEach(p => {
-        this.graphicsCards.push(new Product(p.description, i++, p.id));
+        if (p.forLaptop == 1) {
+          this.graphicsCards.push(new Product(p.description, i++, p.id));
+        }
+        this.desktopGraphicsCards.push(new Product(p.description, i++, p.id));
       })
       this.disableLoading();
     });
@@ -203,7 +213,9 @@ export class AddProductsPageComponent implements OnInit {
     this.service.getRam().subscribe(data => {
       let i = 1;
       data.forEach(p => {
-        this.rams.push(new Product(p.description, i++, p.id));
+        if (p.forLaptop == 1) {
+          this.rams.push(new Product(p.description, i++, p.id));
+        }
       })
       this.disableLoading();
     });
@@ -285,6 +297,7 @@ export class AddProductsPageComponent implements OnInit {
         break;
       }
       case 8: {
+        console.log('Ma duc pe save desktop');
         this.saveDesktop();
         break;
       }
@@ -301,7 +314,10 @@ export class AddProductsPageComponent implements OnInit {
     this.graphicsCardDTO.technology = this.technology;
     this.graphicsCardDTO.photos = this.uploadedFiles;
     this.graphicsCardDTO.stock = this.stock;
-    this.graphicsCardDTO.forLaptop = this.forLaptop;
+    this.graphicsCardDTO.forLaptop = this.decision === 'Da'? 1 : 0;
+    this.graphicsCardDTO.price = this.price;
+    this.graphicsCardDTO.warranty = this.warranty;
+
 
     this.service.saveGraphicsCard(this.graphicsCardDTO).subscribe(() => {
       console.log("Saved graphics card");
@@ -376,7 +392,7 @@ export class AddProductsPageComponent implements OnInit {
     this.processorDTO.photos = this.uploadedFiles;
     this.processorDTO.forLaptop = this.processorForLaptop;
     this.processorDTO.stock = this.stock;
-    this.processorDTO.forLaptop = this.forLaptop;
+    this.processorDTO.forLaptop = this.decision === 'Da'? 1 : 0;
     this.processorDTO.price = this.price;
 
     this.service.saveProcessor(this.processorDTO).subscribe(() => {
@@ -396,6 +412,8 @@ export class AddProductsPageComponent implements OnInit {
     this.storageDTO.speed = this.speed;
     this.storageDTO.photos = this.uploadedFiles;
     this.storageDTO.stock = this.stock;
+    this.storageDTO.form_factor = this.storageFormFactor;
+    this.storageDTO.price = this.price;
 
     this.service.saveStorage(this.storageDTO).subscribe(() => {
       console.log("Saved storage");
@@ -426,11 +444,12 @@ export class AddProductsPageComponent implements OnInit {
     this.ramDTO.warranty = this.warranty;
     this.ramDTO.type = this.ramType;
     this.ramDTO.format = this.ramFormat;
-    this.ramDTO.forLaptop = this.ramForLaptop;
+    this.ramDTO.forLaptop = this.decision === 'Da' ? 1 : 0;
     this.ramDTO.frequency = this.ramFrequency
     this.ramDTO.total = this.ramTotal;
     this.ramDTO.stock = this.stock;
     this.ramDTO.photos = this.uploadedFiles;
+    this.ramDTO.price = this.price;
 
     this.service.saveRam(this.ramDTO).subscribe(() => {
       console.log("Saved ram");
@@ -446,11 +465,12 @@ export class AddProductsPageComponent implements OnInit {
     this.desktopDTO.processor = this.processors[this.processor - 1].productId;
     this.desktopDTO.ram = this.rams[this.ram - 1].productId;
     this.desktopDTO.storage = this.storages[this.selectedStorage - 1].productId;
-    this.desktopDTO.graphicsCard = this.graphicsCards[this.graphicsCard - 1].productId;
+    this.desktopDTO.graphicsCard = this.desktopGraphicsCards[this.graphicsCard - 1].productId;
     this.desktopDTO.photos = this.uploadedFiles;
     this.desktopDTO.type = this.type;
     this.desktopDTO.stock = this.stock;
 
+    console.log('Inainte de endpoint');
     this.service.saveDesktop(this.desktopDTO).subscribe(() => {
       console.log("Saved desktop");
     })

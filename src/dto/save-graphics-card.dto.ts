@@ -8,6 +8,8 @@ export class SaveGraphicsCardDto {
   stock: number;
   forLaptop: number;
   photos: string[];
+  price: number;
+  warranty: number;
 
   constructor() {
   }

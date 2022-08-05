@@ -1,9 +1,12 @@
 <div *ngIf="!loading && !showConfigurator">
   <img src="assets/logo2.png" alt="Logo"
        style="width: 5%; height: auto; position: relative; top: 0; display: block; float: right">
+  <h4 style="float: right; padding-top: 4rem; padding-right: 5rem">Aveți {{cartProductsNumber}} produse in coș</h4>
+  <p-button style="padding-top: 3.5rem; padding-right: 1rem" class="shopping-cart" icon="pi pi-shopping-cart" (onClick)="openCart()"></p-button>
   <div style="padding: 30px;">
     <h4 style="font-size: 14pt">PC workshop</h4>
   </div>
+  <p-toast position="bottom-right"></p-toast>
   <p-splitter *ngIf="!showDetailsView && !showConfigurator" [panelSizes]="[30,70]">
     <ng-template pTemplate>
       <div style="width: 24rem">
@@ -20,11 +23,42 @@
           </div>
         </p-panel>
 
-        <p-panel header="Pret: {{rangeValues[0] + ' - ' + rangeValues[1]}}" class="panelStyle">
+        <p-panel header="Preț: {{rangeValues[0] + ' - ' + rangeValues[1]}}" class="panelStyle">
           <p-slider [min]="0" [max]="5000" [(ngModel)]="rangeValues" [range]="true" (onSlideEnd)="updateProducts()"></p-slider>
         </p-panel>
 
-        <p-panel header="Producator Processor" class="panelStyle" [toggleable]="true">
+        <p-panel header="Tip produs" class="panelStyle" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-radioButton class="checkbox-padding" value="Laptop" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Laptop</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-radioButton class="checkbox-padding" value="Placă de bază" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Placă de bază</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-radioButton class="checkbox-padding" value="Stocare" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Stocare</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-radioButton class="checkbox-padding" value="Memorie RAM" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Memorie RAM</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-radioButton class="checkbox-padding" value="Procesor" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Procesor</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-radioButton class="checkbox-padding" value="Placă video" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Placă video</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-radioButton class="checkbox-padding" value="Desktop" [(ngModel)]="productType" (onClick)="updateProducts()"></p-radioButton>
+            <label class="paddingLabelStyle">Desktop</label>
+          </div>
+        </p-panel>
+
+        <p-panel *ngIf="productType === 'Laptop' || productType === 'Procesor' || productType === 'Desktop'" header="Producator Processor" class="panelStyle" [toggleable]="true">
           <div class="p-field-checkbox">
             <p-checkbox class="checkbox-padding" value="Intel" [(ngModel)]="selectedProcessors" (onChange)="updateProducts()"></p-checkbox>
             <label class="paddingLabelStyle">Intel</label>
@@ -39,7 +73,7 @@
           </div>
         </p-panel>
 
-        <p-panel header="Tip stocare" class="panelStyle" [toggleable]="true">
+        <p-panel *ngIf="productType === 'Laptop' || productType === 'Stocare' || productType === 'Desktop'" header="Tip stocare" class="panelStyle" [toggleable]="true">
           <div class="p-field-checkbox">
             <p-checkbox class="checkbox-padding" value="SSD"
                         [(ngModel)]="selectedMemory" (onChange)="updateProducts()"></p-checkbox>
@@ -57,7 +91,79 @@
           </div>
         </p-panel>
 
-        <p-panel header="Capacitate memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+        <p-panel *ngIf="productType === 'Laptop' || productType === 'Memorie RAM' || productType === 'Desktop'" header="Capacitate memorie RAM" class="panelStyle" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox class="checkbox-padding" value="4"
+                        [(ngModel)]="selectedRAMCapacity" (onChange)="updateProducts()"></p-checkbox>
+            <label>4 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="8"
+                        [(ngModel)]="selectedRAMCapacity" (onChange)="updateProducts()"></p-checkbox>
+            <label>8 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="16"
+                        [(ngModel)]="selectedRAMCapacity" (onChange)="updateProducts()"></p-checkbox>
+            <label>16 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedRamCapacityAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
+        </p-panel>
+
+        <p-panel *ngIf="productType === 'Placă de bază'" header="Socket suportat" class="panelStyle" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox class="checkbox-padding" value="1200"
+                        [(ngModel)]="selectedSocket" (onChange)="updateProducts()"></p-checkbox>
+            <label>1200</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="1150"
+                        [(ngModel)]="selectedSocket" (onChange)="updateProducts()"></p-checkbox>
+            <label>1155</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="1155"
+                        [(ngModel)]="selectedSocket" (onChange)="updateProducts()"></p-checkbox>
+            <label>1155</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedSocketAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
+        </p-panel>
+
+        <p-panel *ngIf="productType === 'Placă de bază'" header="Interfață grafică suportată" class="panelStyle" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox class="checkbox-padding" value="PCI Express x16 4.0"
+                        [(ngModel)]="selectedGraphicalInterface" (onChange)="updateProducts()"></p-checkbox>
+            <label>PCI Express x16 4.0</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="PCI Express x16 3.0"
+                        [(ngModel)]="selectedGraphicalInterface" (onChange)="updateProducts()"></p-checkbox>
+            <label>PCI Express x16 3.0</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="PCI Express x16 5.0"
+                        [(ngModel)]="selectedGraphicalInterface" (onChange)="updateProducts()"></p-checkbox>
+            <label>PCI Express x16 5.0</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedGraphicalInterfaceAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
+        </p-panel>
+
+        <p-panel *ngIf="productType === 'Laptop' || productType === 'Stocare'" header="Capacitate memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
           <div class="p-field-checkbox">
             <p-checkbox class="checkbox-padding" value="256"
                         [(ngModel)]="selectedMemoryCapacity" (onChange)="updateProducts()"></p-checkbox>
@@ -73,65 +179,214 @@
                         [(ngModel)]="selectedMemoryCapacity" (onChange)="updateProducts()"></p-checkbox>
             <label>1 TB</label>
           </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedMemoryCapacityAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
         </p-panel>
 
-        <p-panel header="Tip memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+        <p-panel *ngIf="productType === 'Placă video'" header="Capacitate memorie VRAM" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
           <div class="p-field-checkbox">
-            <p-checkbox class="paddingRightStyle" value="DDDR2"
+            <p-checkbox class="checkbox-padding" value="3"
+                        [(ngModel)]="selectedVRAM" (onChange)="updateProducts()"></p-checkbox>
+            <label>3 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="4"
+                        [(ngModel)]="selectedVRAM" (onChange)="updateProducts()"></p-checkbox>
+            <label>4 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="6"
+                        [(ngModel)]="selectedVRAM" (onChange)="updateProducts()"></p-checkbox>
+            <label>6 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="11"
+                        [(ngModel)]="selectedVRAM" (onChange)="updateProducts()"></p-checkbox>
+            <label>11 GB</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedVRAMAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
+        </p-panel>
+
+        <p-panel *ngIf="productType === 'Laptop' || productType === 'Memorie RAM'" header="Tip memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox class="checkbox-padding" value="DDDR2"
                         [(ngModel)]="selectedRAM" (onChange)="updateProducts()"></p-checkbox>
             <label>DDR2</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="DDR3"
+            <p-checkbox class="checkbox-padding" value="DDR3"
                         [(ngModel)]="selectedRAM" (onChange)="updateProducts()"></p-checkbox>
             <label>DDR3</label>
           </div>
           <div class="p-field-checkbox" style="padding-top: 1rem">
-            <p-checkbox class="paddingRightStyle" value="DDR4"
+            <p-checkbox class="checkbox-padding" value="DDR4"
                         [(ngModel)]="selectedRAM" (onChange)="updateProducts()"></p-checkbox>
             <label>DDR4</label>
           </div>
         </p-panel>
+
+        <p-panel *ngIf="productType === 'Laptop' || productType === 'Memorie RAM'" header="Frecvență memorie" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox class="checkbox-padding" value="2333"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>2333 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="2400"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>2400 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="2666"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>2666 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="2800"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>2800 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="3000"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>3000 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="3200"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>3200 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="3600"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>3600 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="3733"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>3733 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="4000"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>4000 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="4133"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>4133 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="4600"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>4600 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="4800"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>4800 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="5000"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>5000 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="5133"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>5133 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="5333"
+                        [(ngModel)]="selectedRAMFrequency" (onChange)="updateProducts()"></p-checkbox>
+            <label>5333 MHz</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedRAMFrequencyAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
+        </p-panel>
+
+        <p-panel *ngIf="productType === 'Memorie RAM'" header="Latența CAS" style="width: auto; padding-top: 10px; width: auto" [toggleable]="true">
+          <div class="p-field-checkbox">
+            <p-checkbox class="checkbox-padding" value="CL10"
+                        [(ngModel)]="selectedRAMCAS" (onChange)="updateProducts()"></p-checkbox>
+            <label>CL10</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="CL15"
+                        [(ngModel)]="selectedRAMCAS" (onChange)="updateProducts()"></p-checkbox>
+            <label>CL15</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <p-checkbox class="checkbox-padding" value="CL16"
+                        [(ngModel)]="selectedRAMCAS" (onChange)="updateProducts()"></p-checkbox>
+            <label>CL16</label>
+          </div>
+          <div class="p-field-checkbox" style="padding-top: 1rem">
+            <h3>Altele: </h3>
+            <input type="text" pInputText [(ngModel)]="selectedRAMCASAux">
+            <p-button class="p-button-primary" label="aplică"
+                      (click)="updateProducts()"></p-button>
+          </div>
+        </p-panel>
+
       </div>
     </ng-template>
     <ng-template pTemplate>
       <div style="width: 94rem">
-        <p-dataView #dv [value]="products" [paginator]="true" [rows]="40" layout="grid" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading">
+        <p-dataView #dv [value]="products" [paginator]="true" [rows]="9" layout="grid" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading">
           <ng-template pTemplate="header">
             <div class="inline-flex">
               <!--                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
             </div>
             <p-button class="p-button-primary" label="Reîncarcă lista" icon="pi pi-refresh" iconPos="left"
-            (click)="getAllProducts()"></p-button>
+            (click)="reloadList()"></p-button>
             <p-button class="p-button-primary big-padding" label="Logout"
                       (click)="logout()"></p-button>
-            <p-button class="p-button-primary big-padding" label="Modificare stoc"
+            <p-button *ngIf="role" class="p-button-primary big-padding" label="Modificare stoc"
                       (click)="updateStock()"></p-button>
-            <p-button class="p-button-primary big-padding" label="Adăugare produs"
+            <p-button *ngIf="role" class="p-button-primary big-padding" label="Ștergere produs"
+                      (click)="removeProduct()"></p-button>
+            <p-button *ngIf="role" class="p-button-primary big-padding" label="Adăugare produs"
                       (click)="addProduct()"></p-button>
             <p-button class="p-button-primary big-padding" label="Configurator"
                       (click)="goToConfigurator()"></p-button>
-            <h2>Buna ziua, {{user}} !</h2>
+            <div class="h5">
+              <h2 style="">Bună ziua, {{user}} !</h2>
+            </div>
             <div class="p-input-icon-left p-mb-2 p-mb-md-0">
               <i class="pi pi-search"></i>
               <input type="search" pInputText placeholder="Căutare" (input)="dv.filter(filterByName($event))">
             </div>
           </ng-template>
           <ng-template let-product pTemplate="gridItem">
-            <div class="p-col-12 p-md-4">
+            <div *ngIf="product.stock > 0" class="p-col-12 p-md-4">
               <div class="product-grid-item card" style="width: 28rem">
                 <div class="product-grid-item-content" style="text-align: center">
                   <div class="product-name"
-                       style="text-align: center; padding-bottom: 12px">{{product.productType + " " + product.name}}</div>
+                       style="text-align: center; padding-bottom: 12px; height: 3rem">{{product.name}}</div>
                   <p-image [src]="'data:image/jpeg;base64,' + product.photo" alt="Image" width="250" height="250"
                            [preview]="true"></p-image>
                   <div (click)="moveToDetailedView(product)" class="product-description"
-                       style="text-align: left">{{product.description}}</div>
+                       style="text-align: left; height: 5rem">{{product.description}}</div>
                 </div>
                 <div class="product-grid-item-bottom">
                   <span class="product-price">${{product.price}}</span>
-                  <p-chip class="stock-style" label="În stoc" styleClass="p-mr-2 custom-chip">{{product.stock}}</p-chip>
-                  <p-button class="shopping-cart" icon="pi pi-shopping-cart"></p-button>
+                  <p-chip *ngIf="product.stock > 5" class="stock-style" styleClass="p-mr-2 custom-chip">{{getStockLabel(product.stock)}}</p-chip>
+                  <p-chip *ngIf="product.stock > 0 && product.stock < 5" class="stock-style" styleClass="p-mr-2 custom-chip2">{{getStockLabel(product.stock)}}</p-chip>
+                  <p-button class="shopping-cart" icon="pi pi-shopping-cart" (onClick)="addToCart(product.id, product.productType, product.stock, product.productNumber)"></p-button>
                 </div>
               </div>
             </div>
@@ -152,7 +407,7 @@
   </p-splitter>
 
   <div style="background: none">
-    <app-detailed-view (eventEmitter)="backToList($event)" [product]="selectedProduct"
+    <app-detailed-view (eventEmitter)="backToListFromDetailedView($event)" [product]="selectedProduct"
                        *ngIf="showDetailsView"></app-detailed-view>
   </div>
 
@@ -166,5 +421,5 @@
 
 <div style="background: none">
   <app-configurator (eventEmitter)="backToList($event)"
-                    *ngIf="showConfigurator"></app-configurator>
+                    *ngIf="showConfigurator" [initialCartProducts]="cartProducts"></app-configurator>
 </div>

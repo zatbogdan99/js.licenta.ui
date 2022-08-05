@@ -8,6 +8,7 @@ export class SaveRamDto {
   format: string;
   forLaptop: number;
   stock: number;
+  price: number;
   photos: string[];
 
   constructor() {

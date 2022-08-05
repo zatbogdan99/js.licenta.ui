@@ -1,8 +1,25 @@
 .center {
-  display: block;
-  margin-left: auto;
+  display: inline-block;
+  margin-left: 3rem;
   margin-right: auto;
   width: 40%;
+  vertical-align: top;
+}
+
+.center2 {
+  display: inline-block;
+  margin-left: 14rem;
+  margin-right: auto;
+  width: 50%;
+  vertical-align: top;
+}
+
+.right {
+  display: inline-block;
+  margin-left: auto;
+  margin-top: auto;
+  width: 40%;
+  vertical-align: top;
 }
 
 .withPadding {
@@ -15,4 +32,8 @@
 
 .p-galleria .p-galleria-item-nav {
   color: black !important;
+}
+
+.mat-typography h3 {
+  font-size: 30px;
 }
